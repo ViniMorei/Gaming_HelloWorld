@@ -9,12 +9,13 @@ public class Main {
         window.setResizable(false);
         window.setTitle("Hello, Gaming!");
 
-        GamePanel game_panel = new GamePanel();
-        window.add(game_panel);
+        GamePanel gamePanel = new GamePanel();
+        window.add(gamePanel);
 
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
+        gamePanel.startGameThread();
     }
 }
