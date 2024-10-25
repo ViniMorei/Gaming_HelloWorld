@@ -32,12 +32,12 @@ public class TileManager {
             for (int i = 0; i < tiles.length; i++) {
                 tiles[i] = new Tile();
             }
-            tiles[0].image = ImageIO.read(ClassLoader.getSystemResource("tiles/grass.png"));
-            tiles[1].image = ImageIO.read(ClassLoader.getSystemResource("tiles/wall.png"));
-            tiles[2].image = ImageIO.read(ClassLoader.getSystemResource("tiles/water.png"));
-            tiles[3].image = ImageIO.read(ClassLoader.getSystemResource("tiles/earth.png"));
-            tiles[4].image = ImageIO.read(ClassLoader.getSystemResource("tiles/tree.png"));
-            tiles[5].image = ImageIO.read(ClassLoader.getSystemResource("tiles/sand.png"));
+            tiles[0].image = ImageIO.read(ClassLoader.getSystemResource("tiles/flowers.png"));
+            tiles[1].image = ImageIO.read(ClassLoader.getSystemResource("tiles/bricks.png"));
+            tiles[2].image = ImageIO.read(ClassLoader.getSystemResource("tiles/mushroom.png"));
+            tiles[3].image = ImageIO.read(ClassLoader.getSystemResource("tiles/tall_grass.png"));
+            tiles[4].image = ImageIO.read(ClassLoader.getSystemResource("tiles/water_03.png"));
+            tiles[5].image = ImageIO.read(ClassLoader.getSystemResource("tiles/grass.png"));
 
             tiles[1].collision = true;
             tiles[2].collision = true;

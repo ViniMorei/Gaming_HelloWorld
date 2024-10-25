@@ -27,7 +27,7 @@ public class Player extends Entity {
         this.screenY = this.gamePanel.screenHeight / 2 - (this.gamePanel.tileSize / 2);
 
         // Configurações da hitbox (MUDAR QUANDO TROCAR O SPRITE)
-        this.hitBox = new Rectangle(8, 16, 32, 32);
+        this.hitBox = new Rectangle(10, 18, 28, 28);
 
         // Inicializa os métodos do jogador
         this.defineDefaultValues();
@@ -40,7 +40,7 @@ public class Player extends Entity {
         // Inicializa o jogador na linha 23, coluna 21 do world map
         this.worldX = this.gamePanel.tileSize * 23;
         this.worldY = this.gamePanel.tileSize * 21;
-        this.speed = 8;
+        this.speed = 6;
         // Inicializa uma direção inicial, para um sprite ser exibido
         this.direction = "down";
     }
@@ -49,14 +49,14 @@ public class Player extends Entity {
     // Carregar os sprites do jogador
     public void getPlayerImage() {
         try {
-            this.up1 = ImageIO.read(ClassLoader.getSystemResource("player/boy_up_1.png"));
-            this.up2 = ImageIO.read(ClassLoader.getSystemResource("player/boy_up_2.png"));
-            this.down1 = ImageIO.read(ClassLoader.getSystemResource("player/boy_down_1.png"));
-            this.down2 = ImageIO.read(ClassLoader.getSystemResource("player/boy_down_2.png"));
-            this.left1 = ImageIO.read(ClassLoader.getSystemResource("player/boy_left_1.png"));
-            this.left2 = ImageIO.read(ClassLoader.getSystemResource("player/boy_left_2.png"));
-            this.right1 = ImageIO.read(ClassLoader.getSystemResource("player/boy_right_1.png"));
-            this.right2 = ImageIO.read(ClassLoader.getSystemResource("player/boy_right_2.png"));
+            this.up1 = ImageIO.read(ClassLoader.getSystemResource("player/cat_up_01.png"));
+            this.up2 = ImageIO.read(ClassLoader.getSystemResource("player/cat_up_02.png"));
+            this.down1 = ImageIO.read(ClassLoader.getSystemResource("player/cat_down_01.png"));
+            this.down2 = ImageIO.read(ClassLoader.getSystemResource("player/cat_down_02.png"));
+            this.left1 = ImageIO.read(ClassLoader.getSystemResource("player/cat_left_01.png"));
+            this.left2 = ImageIO.read(ClassLoader.getSystemResource("player/cat_left_02.png"));
+            this.right1 = ImageIO.read(ClassLoader.getSystemResource("player/cat_right_01.png"));
+            this.right2 = ImageIO.read(ClassLoader.getSystemResource("player/cat_right_02.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
