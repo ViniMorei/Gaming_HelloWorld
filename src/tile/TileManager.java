@@ -11,8 +11,8 @@ import main.GamePanel;
 
 public class TileManager {
     public GamePanel gamePanel;
-    Tile[] tiles;
-    int[][] mapTileNum;
+    public Tile[] tiles;
+    public int[][] mapTileNum;
 
     // Construtor
     public TileManager(GamePanel gamePanel) {
@@ -39,6 +39,9 @@ public class TileManager {
             tiles[4].image = ImageIO.read(ClassLoader.getSystemResource("tiles/tree.png"));
             tiles[5].image = ImageIO.read(ClassLoader.getSystemResource("tiles/sand.png"));
 
+            tiles[1].collision = true;
+            tiles[2].collision = true;
+            tiles[4].collision = true;
         } catch(IOException e) {
             e.printStackTrace();
         }

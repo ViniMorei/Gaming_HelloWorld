@@ -26,6 +26,9 @@ public class Player extends Entity {
         this.screenX = this.gamePanel.screenWidth / 2 - (this.gamePanel.tileSize / 2);
         this.screenY = this.gamePanel.screenHeight / 2 - (this.gamePanel.tileSize / 2);
 
+        // Configurações da hitbox (MUDAR QUANDO TROCAR O SPRITE)
+        this.hitBox = new Rectangle(8, 16, 32, 32);
+
         // Inicializa os métodos do jogador
         this.defineDefaultValues();
         this.getPlayerImage();
@@ -71,16 +74,39 @@ public class Player extends Entity {
         // jogador fica fixa no centro da tela e tudo se move ao seu redor
         if (keyHandler.upPressed){
             this.direction = "up";
-            this.worldY -= speed;
         } else if (keyHandler.downPressed){
             this.direction = "down";
-            this.worldY += speed;
         } else if (keyHandler.leftPressed){
             this.direction = "left";
-            this.worldX -= speed;
         } else if (keyHandler.rightPressed){
             this.direction = "right";
-            this.worldX += speed;
+        }
+
+        // Verifica se há colisão
+        this.collisionOn = false;
+        this.gamePanel.cChecker.checkTile(this);
+
+        // Só pode se mexer se não tiver colisão
+        if (! this.collisionOn) {
+            // Mover essa condição para mais externa dentro do
+            // update caso queira que o sprite fique estático
+        if(keyHandler.upPressed || keyHandler.downPressed ||
+           keyHandler.leftPressed || keyHandler.rightPressed) {
+                switch (this.direction) {
+                    case "up":
+                        this.worldY -= this.speed;
+                        break;
+                    case "down":
+                        this.worldY += this.speed;
+                        break;
+                    case "left":
+                        this.worldX -= this.speed;
+                        break;
+                    case "right":
+                        this.worldX += this.speed;
+                        break;
+                }
+            }
         }
 
         this.spriteCounter++;
