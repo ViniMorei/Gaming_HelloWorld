@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import main.GamePanel;
+import maze.BinaryTreeMaze;
 
 public class TileManager {
     public GamePanel gamePanel;
@@ -21,7 +22,7 @@ public class TileManager {
         this.mapTileNum = new int[this.gamePanel.maxWorldColumns][this.gamePanel.maxWorldRows];
 
         // Inicializa os métodos de TileManager
-        this.getMap("/maps/world01.txt");
+        this.getMaze();
         this.getTileImage();
     }
 
@@ -32,14 +33,14 @@ public class TileManager {
             for (int i = 0; i < tiles.length; i++) {
                 tiles[i] = new Tile();
             }
-            tiles[0].image = ImageIO.read(ClassLoader.getSystemResource("tiles/flowers.png"));
-            tiles[1].image = ImageIO.read(ClassLoader.getSystemResource("tiles/bricks.png"));
+            tiles[0].image = ImageIO.read(ClassLoader.getSystemResource("tiles/bricks.png"));
+            tiles[1].image = ImageIO.read(ClassLoader.getSystemResource("tiles/flowers.png"));
             tiles[2].image = ImageIO.read(ClassLoader.getSystemResource("tiles/mushroom.png"));
             tiles[3].image = ImageIO.read(ClassLoader.getSystemResource("tiles/tall_grass.png"));
-            tiles[4].image = ImageIO.read(ClassLoader.getSystemResource("tiles/water_03.png"));
+            tiles[4].image = ImageIO.read(ClassLoader.getSystemResource("tiles/water_01.png"));
             tiles[5].image = ImageIO.read(ClassLoader.getSystemResource("tiles/grass.png"));
 
-            tiles[1].collision = true;
+            tiles[0].collision = true;
             tiles[2].collision = true;
             tiles[4].collision = true;
         } catch(IOException e) {
@@ -86,6 +87,19 @@ public class TileManager {
         }
     }
 
+
+    // Gerar um labirinto
+    public void getMaze() {
+        BinaryTreeMaze maze = new BinaryTreeMaze((this.gamePanel.maxWorldRows - 1) / 2, (this.gamePanel.maxWorldColumns - 1) / 2);
+        int [][] tileMap = maze.toTileMap();
+
+        for (int i = 0; i < this.gamePanel.maxWorldRows; i++) {
+            for (int j = 0; j < this.gamePanel.maxWorldColumns; j++) {
+                this.mapTileNum[i][j] = tileMap[i][j];
+
+            }
+        }
+    }
 
     // Exibir na tela
     public void draw(Graphics g2) {

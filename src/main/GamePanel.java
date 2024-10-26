@@ -1,10 +1,10 @@
 package main;
 
-import entity.Player;
-import tile.TileManager;
-
 import java.awt.*;
 import javax.swing.JPanel;
+
+import entity.Player;
+import tile.TileManager;
 
 // Classe que irá exibir o jogo na tela (JFrame)
 public class GamePanel extends JPanel implements Runnable {
@@ -19,8 +19,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = maxScreenRows * tileSize;
 
     // Configurações do World Map
-    public final int maxWorldColumns = 50;
-    public final int maxWorldRows = 50;
+    public final int maxWorldColumns = 55;
+    public final int maxWorldRows = 55;
     public final int worldWidth = tileSize * maxWorldColumns;
     public final int worldHeight = tileSize * maxWorldRows;
 

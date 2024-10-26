@@ -37,9 +37,9 @@ public class Player extends Entity {
 
     // Posição e velocidade inicial do jogador
     public void defineDefaultValues() {
-        // Inicializa o jogador na linha 23, coluna 21 do world map
-        this.worldX = this.gamePanel.tileSize * 23;
-        this.worldY = this.gamePanel.tileSize * 21;
+        // Inicializa o jogador na linha 1, coluna 1 do world map
+        this.worldX = this.gamePanel.tileSize;
+        this.worldY = this.gamePanel.tileSize;
         this.speed = 6;
         // Inicializa uma direção inicial, para um sprite ser exibido
         this.direction = "down";
