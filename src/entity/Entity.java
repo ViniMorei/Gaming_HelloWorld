@@ -26,6 +26,7 @@ public abstract class Entity {
 
     // Configurações de colisão
     public Rectangle hitBox;
+    public int hitBoxDefaultX, hitBoxDefaultY;
     public boolean collisionOn = false;
 
 

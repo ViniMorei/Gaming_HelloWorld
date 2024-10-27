@@ -14,7 +14,7 @@ public class AssetsManager {
     // Instanciar objetos
     public void setObjects() {
         this.gamePanel.objects[0] = new Key(this.gamePanel, 2, 1);
-        this.gamePanel.objects[1] = new Chest(this.gamePanel, 3, 1);
+        this.gamePanel.objects[1] = new Chest(this.gamePanel, 1, 3);
         this.gamePanel.objects[2] = new Crystal(this.gamePanel, 4, 1);
 
     }

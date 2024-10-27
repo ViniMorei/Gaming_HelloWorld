@@ -14,13 +14,26 @@ public abstract class GameObject {
 
     public String name;
     public BufferedImage image;
-    public boolean collision;
     public int worldX, worldY;
-
+    public Rectangle hitBox;
+    public int hitBoxDefaultX, hitBoxDefaultY;
+    public boolean collision = false;
 
     // Construtor
+    public GameObject(GamePanel gamePanel, Rectangle hitBox) {
+        this.gamePanel = gamePanel;
+        this.hitBox = hitBox;
+        this.hitBoxDefaultX = hitBox.x;
+        this.hitBoxDefaultY = hitBox.y;
+    }
+
     public GameObject(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+        this.hitBox = new Rectangle();
+        this.hitBox.x = 0;
+        this.hitBox.y = 0;
+        this.hitBox.width = this.gamePanel.tileSize;
+        this.hitBox.height = this.gamePanel.tileSize;
     }
 
     // Carregar o sprite

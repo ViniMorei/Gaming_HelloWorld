@@ -18,6 +18,11 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
 
+    // Atributos de jogo
+    public int keys;
+    public int maxHealth, health;
+    public int maxMana, mana;
+
     // Construtor
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         super(gamePanel);
@@ -31,6 +36,8 @@ public class Player extends Entity {
         this.hitBox = new Rectangle();
         this.hitBox.x = 4 * this.gamePanel.scale;
         this.hitBox.y = 7 * this.gamePanel.scale;
+        this.hitBoxDefaultX = this.hitBox.x;
+        this.hitBoxDefaultY = this.hitBox.y;
         this.hitBox.width = 7 * this.gamePanel.scale;
         this.hitBox.height = 7 * this.gamePanel.scale;
 
@@ -64,6 +71,31 @@ public class Player extends Entity {
     }
 
 
+    // Interagir com objetos
+    public void pickUpObject(int index) {
+        if (index != 999) {
+            String name = this.gamePanel.objects[index].name;
+
+            switch (name) {
+                case "Key":
+                    this.gamePanel.objects[index] = null;
+                    keys ++;
+                    break;
+                case "Chest":
+                    if (this.keys > 0) {
+                        this.gamePanel.objects[index] = null;
+                        this.keys --;
+                    } else {
+                        this.collisionOn = true;
+                    }
+                    break;
+                default:
+                    this.gamePanel.objects[index] = null;
+                    break;
+            }
+        }
+    }
+
     // Atualizar as informações do jogador
     public void update() {
         // Breve explicação:
@@ -85,6 +117,9 @@ public class Player extends Entity {
         // Verifica se há colisão
         this.collisionOn = false;
         this.gamePanel.cChecker.checkTile(this);
+
+        int objIndex = this.gamePanel.cChecker.checkObject(this, true);
+        pickUpObject(objIndex);
 
         // Só pode se mexer se não tiver colisão
         if (! this.collisionOn) {

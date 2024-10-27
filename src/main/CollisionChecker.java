@@ -12,7 +12,7 @@ public class CollisionChecker {
 
 
     // Verificação se a hitBox da Entidade
-    // está tocando algum objeto com colisão
+    // está tocando algum tile com colisão
     public void checkTile(Entity entity) {
         // Encontrando as coordenadas da hitBox utilizando
         // as coordenadas da Entidade como auxiliar
@@ -71,5 +71,78 @@ public class CollisionChecker {
                 }
                 break;
         }
+    }
+
+
+    // Verificação se a hitBox da Entidade
+    // está tocando algum objeto
+    public int checkObject(Entity entity, boolean player) {
+        int index = 999;
+
+        for (int i = 0; i < this.gamePanel.objects.length; i++) {
+            if (this.gamePanel.objects[i] != null) {
+                // Pega a posição absoluta das
+                // coordenadas da hitbox
+                entity.hitBox.x = entity.worldX + entity.hitBox.x;
+                entity.hitBox.y = entity.worldY + entity.hitBox.y;
+
+                this.gamePanel.objects[i].hitBox.x = this.gamePanel.objects[i].worldX + this.gamePanel.objects[i].hitBox.x;
+                this.gamePanel.objects[i].hitBox.y = this.gamePanel.objects[i].worldY + this.gamePanel.objects[i].hitBox.y;
+
+                switch(entity.direction) {
+                    case "up":
+                        entity.hitBox.y -= entity.speed;
+                        if (entity.hitBox.intersects(this.gamePanel.objects[i].hitBox)) {
+                            if (this.gamePanel.objects[i].collision) {
+                                entity.collisionOn = true;
+                            }
+                            if (player) {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "down":
+                        entity.hitBox.y += entity.speed;
+                        if (entity.hitBox.intersects(this.gamePanel.objects[i].hitBox)) {
+                            if (this.gamePanel.objects[i].collision) {
+                                entity.collisionOn = true;
+                            }
+                            if (player) {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "left":
+                        entity.hitBox.x -= entity.speed;
+                        if (entity.hitBox.intersects(this.gamePanel.objects[i].hitBox)) {
+                            if (this.gamePanel.objects[i].collision) {
+                                entity.collisionOn = true;
+                            }
+                            if (player) {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "right":
+                        entity.hitBox.x += entity.speed;
+                        if (entity.hitBox.intersects(this.gamePanel.objects[i].hitBox)) {
+                            if (this.gamePanel.objects[i].collision) {
+                                entity.collisionOn = true;
+                            }
+                            if (player) {
+                                index = i;
+                            }
+                        }
+                        break;
+                }
+
+                entity.hitBox.x = entity.hitBoxDefaultX;
+                entity.hitBox.y = entity.hitBoxDefaultY;
+                this.gamePanel.objects[i].hitBox.x = this.gamePanel.objects[i].hitBoxDefaultX;
+                this.gamePanel.objects[i].hitBox.y = this.gamePanel.objects[i].hitBoxDefaultY;
+            }
+        }
+
+        return index;
     }
 }

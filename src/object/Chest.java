@@ -9,5 +9,6 @@ public class Chest extends GameObject {
         this.image = setupSprite("/objects/chest.png");
         this.worldX = this.gamePanel.tileSize * x;
         this.worldY = this.gamePanel.tileSize * y;
+        this.collision = true;
     }
 }
