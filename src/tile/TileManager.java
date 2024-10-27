@@ -6,8 +6,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
 import main.GamePanel;
+import main.Utils;
 import maze.BinaryTreeMaze;
 
 public class TileManager {
@@ -29,20 +31,27 @@ public class TileManager {
 
     // Atribuir as imagens dos tiles a atributos
     public void getTileImage() {
-        try {
-            for (int i = 0; i < tiles.length; i++) {
-                tiles[i] = new Tile();
-            }
-            tiles[0].image = ImageIO.read(ClassLoader.getSystemResource("tiles/bricks.png"));
-            tiles[1].image = ImageIO.read(ClassLoader.getSystemResource("tiles/flowers.png"));
-            tiles[2].image = ImageIO.read(ClassLoader.getSystemResource("tiles/mushroom.png"));
-            tiles[3].image = ImageIO.read(ClassLoader.getSystemResource("tiles/tall_grass.png"));
-            tiles[4].image = ImageIO.read(ClassLoader.getSystemResource("tiles/water_01.png"));
-            tiles[5].image = ImageIO.read(ClassLoader.getSystemResource("tiles/grass.png"));
+        setupImage(0, "bricks", true);
+        setupImage(1, "grass", false);
+        setupImage(2, "flowers", false);
+        setupImage(3, "mushroom", true);
+        setupImage(4, "tall_grass", false);
+        setupImage(5, "rocks", false);
+        setupImage(6, "water_01", true);
+        setupImage(7, "water_02", true);
+    }
 
-            tiles[0].collision = true;
-            tiles[2].collision = true;
-            tiles[4].collision = true;
+
+    // Carrega a imagem (já redimensionada)
+    public void setupImage(int index, String fileName, boolean collision) {
+        Utils util = new Utils();
+
+        try {
+            tiles[index] = new Tile();
+            tiles[index].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/" + fileName + ".png")));
+            tiles[index].image = util.scaleImage(tiles[index].image, this.gamePanel.tileSize, this.gamePanel.tileSize);
+            tiles[index].collision = collision;
+
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -52,8 +61,7 @@ public class TileManager {
     // Carregar o arquivo txt do mapa
     public void getMap(String filePath) {
         try {
-            InputStream is = getClass().getResourceAsStream(filePath);
-            assert is != null;
+            InputStream is = Objects.requireNonNull(getClass().getResourceAsStream(filePath));
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             // Variáveis locais para controlar a linha e coluna do arquivo

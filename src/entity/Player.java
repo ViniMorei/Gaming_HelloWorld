@@ -3,10 +3,12 @@ package entity;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 import javax.imageio.ImageIO;
 
 import main.KeyHandler;
 import main.GamePanel;
+import main.Utils;
 
 public class Player extends Entity {
     // Atributos KeyHandler e GamePanel para definir onde ele estará e quais inputs responderá
@@ -27,7 +29,11 @@ public class Player extends Entity {
         this.screenY = this.gamePanel.screenHeight / 2 - (this.gamePanel.tileSize / 2);
 
         // Configurações da hitbox (MUDAR QUANDO TROCAR O SPRITE)
-        this.hitBox = new Rectangle(10, 18, 28, 28);
+        this.hitBox = new Rectangle();
+        this.hitBox.x = 4 * this.gamePanel.scale;
+        this.hitBox.y = 7 * this.gamePanel.scale;
+        this.hitBox.width = 7 * this.gamePanel.scale;
+        this.hitBox.height = 7 * this.gamePanel.scale;
 
         // Inicializa os métodos do jogador
         this.defineDefaultValues();
@@ -46,23 +52,33 @@ public class Player extends Entity {
     }
 
 
-    // Carregar os sprites do jogador
+    // Atribuir os sprites aos atributos
     public void getPlayerImage() {
-        try {
-            this.up1 = ImageIO.read(ClassLoader.getSystemResource("player/cat_up_01.png"));
-            this.up2 = ImageIO.read(ClassLoader.getSystemResource("player/cat_up_02.png"));
-            this.down1 = ImageIO.read(ClassLoader.getSystemResource("player/cat_down_01.png"));
-            this.down2 = ImageIO.read(ClassLoader.getSystemResource("player/cat_down_02.png"));
-            this.left1 = ImageIO.read(ClassLoader.getSystemResource("player/cat_left_01.png"));
-            this.left2 = ImageIO.read(ClassLoader.getSystemResource("player/cat_left_02.png"));
-            this.right1 = ImageIO.read(ClassLoader.getSystemResource("player/cat_right_01.png"));
-            this.right2 = ImageIO.read(ClassLoader.getSystemResource("player/cat_right_02.png"));
+        this.up1 = this.setupImage("cat_up_01");
+        this.up2 = this.setupImage("cat_up_02");
+        this.down1 = this.setupImage("cat_down_01");
+        this.down2 = this.setupImage("cat_down_02");
+        this.left1 = this.setupImage("cat_left_01");
+        this.left2 = this.setupImage("cat_left_02");
+        this.right1 = this.setupImage("cat_right_01");
+        this.right2 = this.setupImage("cat_right_02");
+    }
 
+
+    // Carrega as imagens redimensionadas
+    public BufferedImage setupImage(String fileName) {
+        Utils util = new Utils();
+        BufferedImage image, scaledImage = null;
+
+        try {
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/" + fileName + ".png")));
+            scaledImage = util.scaleImage(image, this.gamePanel.tileSize, this.gamePanel.tileSize);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
 
+        return scaledImage;
+    }
 
     // Atualizar as informações do jogador
     public void update() {

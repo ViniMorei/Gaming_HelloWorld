@@ -9,8 +9,8 @@ import tile.TileManager;
 // Classe que irá exibir o jogo na tela (JFrame)
 public class GamePanel extends JPanel implements Runnable {
     // Configurações da tela
-    final int originalTileSize = 16; // Tile de 16x16 pixels
-    final int scale = 3; // Escala para redimensionar os tiles
+    public final int originalTileSize = 16; // Tile de 16x16 pixels
+    public final int scale = 3; // Escala para redimensionar os tiles
     public final int maxScreenColumns = 16; // Número de tiles horizontalmente
     public final int maxScreenRows = 12; // Número de tiles verticalmente
 
@@ -25,12 +25,19 @@ public class GamePanel extends JPanel implements Runnable {
     public final int worldHeight = tileSize * maxWorldRows;
 
     // Configurações do jogo
-    double FPS = 60;
-    KeyHandler keyH = new KeyHandler();
     Thread gameThread;
-    TileManager tileManager = new TileManager(this);
-    public Player player = new Player(this, keyH);
+    double FPS = 60;
+    public UI ui = new UI(this);
+    public KeyHandler keyH = new KeyHandler(this);
+    public TileManager tileManager = new TileManager(this);
     public CollisionChecker cChecker = new CollisionChecker(this);
+    public Player player = new Player(this, keyH);
+
+    // Game State
+    public int gameState;
+    public final int PLAY_STATE = 1;
+    public final int PAUSE_STATE = 2;
+
 
     // Construtor
     public GamePanel() {
@@ -39,8 +46,13 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.addKeyListener(keyH);
+        this.setupGame();
     }
 
+
+    public void setupGame() {
+        this.gameState = PLAY_STATE;
+    }
 
     // Começa a execução do script
     // Semelhante ao Start() no Unity
@@ -74,7 +86,12 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public void update() {
-        player.update();
+        if (gameState == PLAY_STATE) {
+            player.update();
+        }
+        if (gameState == PAUSE_STATE) {
+
+        }
     }
 
 
@@ -86,6 +103,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         tileManager.draw(g2);
         player.draw(g2);
+        ui.draw(g2);
 
         g2.dispose();
     }
