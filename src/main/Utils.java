@@ -2,6 +2,9 @@ package main;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
+
+import tile.TileManager;
 
 public class Utils {
     // Redimensionar uma imagem para a escala definida
@@ -12,5 +15,12 @@ public class Utils {
         g.dispose();
 
         return scaledImage;
+    }
+
+
+    // Retornar um tile válido aleatório
+    public int[] getRandomTile(TileManager tileManager) {
+        Random random = new Random();
+        return tileManager.pathTiles.get(random.nextInt(tileManager.pathTiles.size()));
     }
 }

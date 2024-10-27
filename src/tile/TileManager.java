@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 import main.GamePanel;
 import main.Utils;
@@ -16,6 +18,7 @@ public class TileManager {
     public GamePanel gamePanel;
     public Tile[] tiles;
     public int[][] mapTileNum;
+    public List<int[]> pathTiles;
 
     public int spriteCounter = 0;
     public int spriteNum = 6;
@@ -25,6 +28,7 @@ public class TileManager {
         this.gamePanel = gamePanel;
         this.tiles = new Tile[10];
         this.mapTileNum = new int[this.gamePanel.maxWorldColumns][this.gamePanel.maxWorldRows];
+        this.pathTiles = new ArrayList<>();
 
         // Inicializa os métodos de TileManager
         this.getMaze();
@@ -107,7 +111,9 @@ public class TileManager {
         for (int i = 0; i < this.gamePanel.maxWorldRows; i++) {
             for (int j = 0; j < this.gamePanel.maxWorldColumns; j++) {
                 this.mapTileNum[i][j] = tileMap[i][j];
-
+                if (this.mapTileNum[i][j] != 0) {
+                    this.pathTiles.add(new int[]{i, j});
+                }
             }
         }
     }
