@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public abstract class Object {
+public abstract class GameObject {
     public GamePanel gamePanel;
 
     public String name;
@@ -19,7 +19,7 @@ public abstract class Object {
 
 
     // Construtor
-    public Object(GamePanel gamePanel) {
+    public GameObject(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
 
@@ -42,13 +42,13 @@ public abstract class Object {
     // Exibir na tela
     public void draw(Graphics2D g2) {
         int screenX = this.worldX - this.gamePanel.player.worldX + this.gamePanel.player.screenX;
-        int screenY = this.worldY - this.gamePanel.player.worldY + this.gamePanel.player.worldY;
+        int screenY = this.worldY - this.gamePanel.player.worldY + this.gamePanel.player.screenY;
 
         if (this.worldX + this.gamePanel.tileSize > this.gamePanel.player.worldX - this.gamePanel.player.screenX
         && this.worldX - this.gamePanel.tileSize < this.gamePanel.player.worldX + this.gamePanel.player.screenX
         && this.worldY + this.gamePanel.tileSize > this.gamePanel.player.worldY - this.gamePanel.player.screenY
         && this.worldY - this.gamePanel.tileSize < this.gamePanel.player.worldY + this.gamePanel.player.screenY) {
-            g2.drawImage(this.image,screenX, screenY, this.gamePanel.tileSize, this.gamePanel.tileSize, null);
+            g2.drawImage(this.image, screenX, screenY, this.gamePanel.tileSize, this.gamePanel.tileSize, null);
         }
     }
 }

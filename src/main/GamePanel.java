@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.JPanel;
 
 import entity.Player;
+import object.GameObject;
 import tile.TileManager;
 
 // Classe que irá exibir o jogo na tela (JFrame)
@@ -33,6 +34,10 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker cChecker = new CollisionChecker(this);
     public Player player = new Player(this, keyH);
 
+    // Assets
+    public AssetsManager assets = new AssetsManager(this);
+    public GameObject[] objects = new GameObject[10];
+
     // Game State
     public int gameState;
     public final int PLAY_STATE = 1;
@@ -52,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         this.gameState = PLAY_STATE;
+        this.assets.setObjects();
     }
 
     // Começa a execução do script
@@ -104,6 +110,11 @@ public class GamePanel extends JPanel implements Runnable {
 
         tileManager.drawBackground(g2);
         tileManager.draw(g2);
+        for (int i = 0; i < objects.length; i++) {
+            if (objects[i] != null) {
+                objects[i].draw(g2);
+            }
+        }
         player.draw(g2);
         ui.draw(g2);
 
