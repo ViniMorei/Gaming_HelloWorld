@@ -88,6 +88,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         if (gameState == PLAY_STATE) {
             player.update();
+            tileManager.updateBackground();
         }
         if (gameState == PAUSE_STATE) {
 
@@ -101,6 +102,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D)g;
 
+        tileManager.drawBackground(g2);
         tileManager.draw(g2);
         player.draw(g2);
         ui.draw(g2);

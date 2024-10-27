@@ -17,6 +17,9 @@ public class TileManager {
     public Tile[] tiles;
     public int[][] mapTileNum;
 
+    public int spriteCounter = 0;
+    public int spriteNum = 6;
+
     // Construtor
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -105,6 +108,40 @@ public class TileManager {
             for (int j = 0; j < this.gamePanel.maxWorldColumns; j++) {
                 this.mapTileNum[i][j] = tileMap[i][j];
 
+            }
+        }
+    }
+
+
+    // Animar o background
+    public void updateBackground() {
+        this.spriteCounter++;
+        if (this.spriteCounter > 20) {
+            if (this.spriteNum == 6) {
+                this.spriteNum = 7;
+            } else if (this.spriteNum == 7) {
+                this.spriteNum = 6;
+            }
+            this.spriteCounter = 0;
+        }
+    }
+
+    // Desenhar background
+    public void drawBackground(Graphics2D g2) {
+        int x = 0, y = 0;
+        int row = 0, col = 0;
+
+        while (row < this.gamePanel.maxScreenRows &&
+               col < this.gamePanel.maxScreenColumns) {
+            g2.drawImage(tiles[this.spriteNum].image, x, y, this.gamePanel.tileSize, this.gamePanel.tileSize, null);
+            col++;
+            x += this.gamePanel.tileSize;
+
+            if (col == this.gamePanel.maxScreenColumns) {
+                col = 0;
+                row++;
+                x = 0;
+                y += this.gamePanel.tileSize;
             }
         }
     }
