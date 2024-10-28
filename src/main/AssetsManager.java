@@ -16,14 +16,36 @@ public class AssetsManager {
         Utils utils = new Utils();
         int[] rowCol;
 
+        // Instanciação dos objetos
         rowCol = utils.getRandomTile(this.gamePanel.tileManager);
-        this.gamePanel.objects[0] = new Key(this.gamePanel, rowCol[1], rowCol[0]);
-        rowCol = utils.getRandomTile(this.gamePanel.tileManager);
-        this.gamePanel.objects[1] = new Chest(this.gamePanel, rowCol[1], rowCol[0]);
-        rowCol = utils.getRandomTile(this.gamePanel.tileManager);
-        this.gamePanel.objects[2] = new Crystal(this.gamePanel, rowCol[1], rowCol[0]);
+        this.gamePanel.objects[0] = new Key(this.gamePanel, rowCol[0], rowCol[1]);
 
+        rowCol = utils.getRandomTile(this.gamePanel.tileManager);
+        this.gamePanel.objects[1] = new Chest(this.gamePanel, rowCol[0], rowCol[1]);
 
+        rowCol = utils.getRandomTile(this.gamePanel.tileManager);
+        this.gamePanel.objects[2] = new Crystal(this.gamePanel, rowCol[0], rowCol[1]);
+
+        rowCol = utils.getRandomTile(this.gamePanel.tileManager);
+        this.gamePanel.objects[3] = new Key(this.gamePanel, rowCol[0], rowCol[1]);
+
+        rowCol = utils.getRandomTile(this.gamePanel.tileManager);
+        this.gamePanel.objects[4] = new Chest(this.gamePanel, rowCol[0], rowCol[1]);
+
+        rowCol = utils.getRandomTile(this.gamePanel.tileManager);
+        this.gamePanel.objects[5] = new Crystal(this.gamePanel, rowCol[0], rowCol[1]);
+
+        rowCol = utils.getRandomTile(this.gamePanel.tileManager);
+        this.gamePanel.objects[6] = new Key(this.gamePanel, rowCol[0], rowCol[1]);
+
+        rowCol = utils.getRandomTile(this.gamePanel.tileManager);
+        this.gamePanel.objects[7] = new Chest(this.gamePanel, rowCol[0], rowCol[1]);
+
+        rowCol = utils.getRandomTile(this.gamePanel.tileManager);
+        this.gamePanel.objects[8] = new Crystal(this.gamePanel, rowCol[0], rowCol[1]);
+
+        rowCol = utils.getRandomTile(this.gamePanel.tileManager);
+        this.gamePanel.objects[9] = new Key(this.gamePanel, rowCol[0], rowCol[1]);
     }
 
 
