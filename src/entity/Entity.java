@@ -99,8 +99,8 @@ public abstract class Entity {
                     break;
             }
             g2.drawImage(image, screenX, screenY, this.gamePanel.tileSize, this.gamePanel.tileSize, null);
-            g2.setColor(Color.red);
-            g2.drawRect(screenX + this.hitBox.x, screenY + this.hitBox.y, this.hitBox.width, this.hitBox.height);
+            // g2.setColor(Color.red);
+            // g2.drawRect(screenX + this.hitBox.x, screenY + this.hitBox.y, this.hitBox.width, this.hitBox.height);
         }
     }
 
