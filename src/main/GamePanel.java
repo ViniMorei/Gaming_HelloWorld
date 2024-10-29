@@ -3,7 +3,7 @@ package main;
 import java.awt.*;
 import javax.swing.JPanel;
 
-import entity.Player;
+import entity.*;
 import object.GameObject;
 import tile.TileManager;
 
@@ -38,6 +38,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH);
     public AssetsManager assets = new AssetsManager(this);
     public GameObject[] objects = new GameObject[10];
+    public Entity[] monsters = new Entity[10];
 
     // Game State
     public int gameState;
@@ -59,6 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         this.gameState = PLAY_STATE;
         this.assets.setObjects();
+        this.assets.setMonsters();
     }
 
     // Começa a execução do script
@@ -95,6 +97,11 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         if (gameState == PLAY_STATE) {
             player.update();
+            for (int i = 0; i < monsters.length; i++) {
+                if (monsters[i] != null) {
+                    monsters[i].update();
+                }
+            }
             tileManager.updateBackground();
         }
         if (gameState == PAUSE_STATE) {
@@ -114,6 +121,11 @@ public class GamePanel extends JPanel implements Runnable {
         for (int i = 0; i < objects.length; i++) {
             if (objects[i] != null) {
                 objects[i].draw(g2);
+            }
+        }
+        for (int i = 0; i < monsters.length; i++) {
+            if (monsters[i] != null) {
+                monsters[i].draw(g2);
             }
         }
         player.draw(g2);

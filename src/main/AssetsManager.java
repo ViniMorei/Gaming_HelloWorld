@@ -1,5 +1,6 @@
 package main;
 
+import entity.*;
 import object.*;
 
 public class AssetsManager {
@@ -57,6 +58,16 @@ public class AssetsManager {
 
     // Instanciar monstros
     public void setMonsters() {
+        Utils utils = new Utils();
+        int[] rowCol;
 
+        for (int i = 0; i < this.gamePanel.monsters.length; i++) {
+            rowCol = utils.getRandomTile(this.gamePanel.tileManager);
+            if (i % 2 == 0) {
+                this.gamePanel.monsters[i] = new Slime(this.gamePanel, rowCol[0], rowCol[1]);
+            } else {
+                this.gamePanel.monsters[i] = new Mimic(this.gamePanel, rowCol[0], rowCol[1]);
+            }
+        }
     }
 }

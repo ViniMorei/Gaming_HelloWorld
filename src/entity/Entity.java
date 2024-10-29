@@ -23,6 +23,7 @@ public abstract class Entity {
     // Utilizados para fazer a lógica da troca de sprites da mesma direção (andar)
     public int spriteCounter = 0;
     public int spriteNum = 1;
+    public int actionLockCounter = 0;
 
     // Configurações de colisão
     public Rectangle hitBox;
@@ -53,6 +54,87 @@ public abstract class Entity {
 
 
     // Exibir na tela
+    public void draw(Graphics2D g2) {
+        BufferedImage image = null;
+        int screenX = this.worldX - this.gamePanel.player.worldX + this.gamePanel.player.screenX;
+        int screenY = this.worldY - this.gamePanel.player.worldY + this.gamePanel.player.screenY;
 
+        // Essa condição é pra só desenhar se estiver dentro dos limites da tela (economizar recursos)
+        if (this.worldX + this.gamePanel.tileSize > this.gamePanel.player.worldX - this.gamePanel.player.screenX
+                && this.worldX - this.gamePanel.tileSize < this.gamePanel.player.worldX + this.gamePanel.player.screenX
+                && this.worldY + this.gamePanel.tileSize > this.gamePanel.player.worldY - this.gamePanel.player.screenY
+                && this.worldY - this.gamePanel.tileSize < this.gamePanel.player.worldY + this.gamePanel.player.screenY) {
+            switch(this.direction) {
+                case "up":
+                    if (this.spriteNum == 1) {
+                        image = this.up1;
+                    }
+                    if (this.spriteNum == 2) {
+                        image = this.up2;
+                    }
+                    break;
+                case "down":
+                    if (this.spriteNum == 1) {
+                        image = this.down1;
+                    }
+                    if (this.spriteNum == 2) {
+                        image = this.down2;
+                    }
+                    break;
+                case "left":
+                    if (this.spriteNum == 1) {
+                        image = this.left1;
+                    }
+                    if (this.spriteNum == 2) {
+                        image = this.left2;
+                    }
+                    break;
+                case "right":
+                    if (this.spriteNum == 1) {
+                        image = this.right1;
+                    }
+                    if (this.spriteNum == 2) {
+                        image = this.right2;
+                    }
+                    break;
+            }
+            g2.drawImage(image, screenX, screenY, this.gamePanel.tileSize, this.gamePanel.tileSize, null);
+            g2.setColor(Color.red);
+            g2.drawRect(screenX + this.hitBox.x, screenY + this.hitBox.y, this.hitBox.width, this.hitBox.height);
+        }
+    }
+
+
+    // Verificar mudanças na entidade
+    public void update() {
+        this.setAction();
+
+        collisionOn = false;
+        this.gamePanel.cChecker.checkTile(this);
+        if (! this.collisionOn) {
+            switch (this.direction) {
+                case "up": this.worldY -= this.speed; break;
+                case "down": this.worldY += this.speed; break;
+                case "left": this.worldX -= this.speed; break;
+                case "right": this.worldX += this.speed; break;
+            }
+        }
+
+        this.spriteCounter++;
+        if (this.spriteCounter > 10) {
+            if (this.spriteNum == 1) {
+                this.spriteNum = 2;
+            } else if (this.spriteNum == 2) {
+                this.spriteNum = 1;
+            }
+            this.spriteCounter = 0;
+        }
+    }
+
+
+    // Verificar qual ação será tomada
+    public void setAction() {
+
+    }
 
 }
