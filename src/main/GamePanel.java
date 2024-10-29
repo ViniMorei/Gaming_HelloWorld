@@ -30,11 +30,12 @@ public class GamePanel extends JPanel implements Runnable {
     double FPS = 60;
     public UI ui = new UI(this);
     public KeyHandler keyH = new KeyHandler(this);
+    public Sound sound = new Sound();
     public TileManager tileManager = new TileManager(this);
     public CollisionChecker cChecker = new CollisionChecker(this);
-    public Player player = new Player(this, keyH);
 
-    // Assets
+    // Entities e assets
+    public Player player = new Player(this, keyH);
     public AssetsManager assets = new AssetsManager(this);
     public GameObject[] objects = new GameObject[10];
 
@@ -119,5 +120,12 @@ public class GamePanel extends JPanel implements Runnable {
         ui.draw(g2);
 
         g2.dispose();
+    }
+
+
+    // Tocar efeitos sonoros
+    public void playSFX(int i) {
+        sound.setFile(i);
+        sound.play();
     }
 }

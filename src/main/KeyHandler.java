@@ -41,6 +41,9 @@ public class KeyHandler implements KeyListener {
                 this.gamePanel.gameState = gamePanel.PLAY_STATE;
             }
         }
+        if (code == KeyEvent.VK_M){
+            this.gamePanel.playSFX(0);
+        }
     }
 
 
