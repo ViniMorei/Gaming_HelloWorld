@@ -19,7 +19,7 @@ public class Player extends Entity {
     public final int screenY;
 
     // Atributos de jogo
-    public int keys;
+    public int keys, chests;
     public int maxHealth, health;
     public int maxMana, mana;
 
@@ -55,6 +55,9 @@ public class Player extends Entity {
         this.speed = 6;
         // Inicializa uma direção inicial, para um sprite ser exibido
         this.direction = "down";
+
+        this.chests = 4;
+        this.keys = 0;
     }
 
 
@@ -79,12 +82,17 @@ public class Player extends Entity {
             switch (name) {
                 case "Key":
                     this.gamePanel.objects[index] = null;
-                    keys ++;
+                    this.keys ++;
                     break;
                 case "Chest":
                     if (this.keys > 0) {
                         this.gamePanel.objects[index] = null;
                         this.keys --;
+                        this.chests --;
+
+                        if (this.chests == 0) {
+                            this.gamePanel.gameState = this.gamePanel.FINISHED_STATE;
+                        }
                     } else {
                         this.collisionOn = true;
                     }
