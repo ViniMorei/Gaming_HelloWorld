@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import main.GamePanel;
 import main.Utils;
@@ -41,7 +42,7 @@ public class TileManager {
         setupImage(0, "bricks", true);
         setupImage(1, "grass", false);
         setupImage(2, "flowers", false);
-        setupImage(3, "mushroom", true);
+        setupImage(3, "mushroom", false);
         setupImage(4, "tall_grass", false);
         setupImage(5, "rocks", false);
         setupImage(6, "water_01", true);
@@ -106,6 +107,7 @@ public class TileManager {
     // Gerar um labirinto
     public void getMaze() {
         BinaryTreeMaze maze = new BinaryTreeMaze((this.gamePanel.maxWorldRows - 1) / 2, (this.gamePanel.maxWorldColumns - 1) / 2);
+        // Random random = new Random();
         int [][] tileMap = maze.toTileMap();
 
         for (int i = 0; i < this.gamePanel.maxWorldRows; i++) {
@@ -113,6 +115,11 @@ public class TileManager {
                 this.mapTileNum[i][j] = tileMap[i][j];
                 if (this.mapTileNum[i][j] != 0) {
                     this.pathTiles.add(new int[]{i, j});
+                    /*
+                     // Definir um sprite aleatório de 1 a 5
+                     int sprite = random.nextInt(1,6);
+                     this.mapTileNum[i][j] = sprite;
+                     */
                 }
             }
         }

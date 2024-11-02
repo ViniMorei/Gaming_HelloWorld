@@ -56,6 +56,10 @@ public class Player extends Entity {
         // Inicializa uma direção inicial, para um sprite ser exibido
         this.direction = "down";
 
+        this.maxHealth = 5;
+        this.health = maxHealth;
+        this.maxMana = 5;
+        this.mana = maxMana;
         this.chests = 4;
         this.keys = 0;
     }

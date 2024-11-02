@@ -1,6 +1,8 @@
 package main;
 
 import object.Chest;
+import object.Crystal;
+import object.Heart;
 import object.Key;
 
 import java.awt.*;
@@ -15,6 +17,8 @@ public class UI {
     Font MP16REG;
     BufferedImage keyImage;
     BufferedImage chestImage;
+    BufferedImage heartImage;
+    BufferedImage crystalImage;
 
     // Construtor
     public UI(GamePanel gamePanel) {
@@ -32,9 +36,13 @@ public class UI {
         }
 
         Key key = new Key(this.gamePanel, -1, -1);
-        Chest chest = new Chest(this.gamePanel, -2, -2);
+        Chest chest = new Chest(this.gamePanel, -2, -1);
+        Heart heart = new Heart(this.gamePanel, -3, -1);
+        Crystal crystal = new Crystal(this.gamePanel, -4, -1);
         this.keyImage = key.image;
         this.chestImage = chest.image;
+        this.heartImage = heart.image;
+        this.crystalImage = crystal.image;
     }
 
 
@@ -44,15 +52,7 @@ public class UI {
         g2.setColor(Color.white);
 
         if (this.gamePanel.gameState == this.gamePanel.PLAY_STATE) {
-            g2.drawImage(keyImage, this.gamePanel.tileSize / 2, this.gamePanel.tileSize / 2,
-                    this.gamePanel.tileSize - 8, this.gamePanel.tileSize - 8, null);
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40));
-            g2.drawString("x " + this.gamePanel.player.keys, 74, 58);
-
-            g2.drawImage(chestImage, this.gamePanel.tileSize / 2, this.gamePanel.tileSize + 32,
-                    this.gamePanel.tileSize - 8, this.gamePanel.tileSize - 8, null);
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40));
-            g2.drawString("x " + this.gamePanel.player.chests, 74, 113);
+            drawGameHUD();
         }
         if (this.gamePanel.gameState == this.gamePanel.PAUSE_STATE) {
             drawPauseScreen();
@@ -60,7 +60,44 @@ public class UI {
         if (this.gamePanel.gameState == this.gamePanel.FINISHED_STATE) {
             drawFinishedScreen();
         }
+        if (this.gamePanel.gameState == this.gamePanel.GAME_OVER_STATE) {
+            drawGameOverScreen();
+        }
     }
+
+
+    // Exibir a HUD com os itens coletados, vida e magia
+    public void drawGameHUD() {
+        int x = this.gamePanel.tileSize / 2;
+        int y = this.gamePanel.tileSize / 2;
+
+        // Desenhar corações
+        for (int i = 0; i < this.gamePanel.player.health; i++){
+            g2.drawImage(heartImage, x, y, this.gamePanel.tileSize, this.gamePanel.tileSize, null);
+            x += this.gamePanel.tileSize;
+        }
+        x += this.gamePanel.tileSize * 9; // Desenhar os cristais da extremidade direita até o centro da tela
+
+        // Desenhar cristais de magia
+        for (int i = 0; i < this.gamePanel.player.mana; i++){
+            g2.drawImage(crystalImage, x, y, this.gamePanel.tileSize, this.gamePanel.tileSize, null);
+            x -= this.gamePanel.tileSize;
+        }
+        x = this.gamePanel.tileSize / 2;
+        y += this.gamePanel.tileSize + 8;
+
+        g2.drawImage(keyImage, x, y,
+                this.gamePanel.tileSize - 8, this.gamePanel.tileSize - 8, null);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40));
+        g2.drawString("x " + this.gamePanel.player.keys, x + 54, y + 32);
+
+        y += this.gamePanel.tileSize + 8;
+        g2.drawImage(chestImage, x, y,
+                this.gamePanel.tileSize - 8, this.gamePanel.tileSize - 8, null);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40));
+        g2.drawString("x " + this.gamePanel.player.chests, x + 56, y + 32);
+    }
+
 
     public void drawPauseScreen() {
         String text = "PAUSED";
@@ -81,4 +118,15 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80));
         g2.drawString(text, x, y);
     }
+
+    public void drawGameOverScreen() {
+        String text = "GAME OVER";
+        int x = this.gamePanel.screenWidth / 2 - 200;
+        int y = this.gamePanel.screenHeight / 2;
+
+        g2.setColor(Color.yellow);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80));
+        g2.drawString(text, x, y);
+    }
+
 }
