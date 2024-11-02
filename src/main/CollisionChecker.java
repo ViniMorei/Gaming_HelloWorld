@@ -145,4 +145,70 @@ public class CollisionChecker {
 
         return index;
     }
+
+
+    // Verificar colisão com monstros
+    public void checkMonster(Entity entity, boolean player) {
+        if (!entity.invincible) {
+            for (int i = 0; i < this.gamePanel.monsters.length; i++) {
+                if (this.gamePanel.monsters[i] != null) {
+                    // Pega a posição absoluta das
+                    // coordenadas da hitbox
+                    entity.hitBox.x = entity.worldX + entity.hitBox.x;
+                    entity.hitBox.y = entity.worldY + entity.hitBox.y;
+
+                    this.gamePanel.monsters[i].hitBox.x = this.gamePanel.monsters[i].worldX + this.gamePanel.monsters[i].hitBox.x;
+                    this.gamePanel.monsters[i].hitBox.y = this.gamePanel.monsters[i].worldY + this.gamePanel.monsters[i].hitBox.y;
+
+                    switch(entity.direction) {
+                        case "up":
+                            entity.hitBox.y -= entity.speed;
+                            if (entity.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
+                                entity.collisionOn = true;
+                                if (player) {
+                                    this.gamePanel.player.health--;
+                                    this.gamePanel.player.invincible = true;
+                                }
+                            }
+                            break;
+                        case "down":
+                            entity.hitBox.y += entity.speed;
+                            if (entity.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
+                                entity.collisionOn = true;
+                                if (player) {
+                                    this.gamePanel.player.health--;
+                                    this.gamePanel.player.invincible = true;
+                                }
+                            }
+                            break;
+                        case "left":
+                            entity.hitBox.x -= entity.speed;
+                            if (entity.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
+                                entity.collisionOn = true;
+                                if (player) {
+                                    this.gamePanel.player.health--;
+                                    this.gamePanel.player.invincible = true;
+                                }
+                            }
+                            break;
+                        case "right":
+                            entity.hitBox.x += entity.speed;
+                            if (entity.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
+                                entity.collisionOn = true;
+                                if (player) {
+                                    this.gamePanel.player.health--;
+                                    this.gamePanel.player.invincible = true;
+                                }
+                            }
+                            break;
+                    }
+
+                    entity.hitBox.x = entity.hitBoxDefaultX;
+                    entity.hitBox.y = entity.hitBoxDefaultY;
+                    this.gamePanel.monsters[i].hitBox.x = this.gamePanel.monsters[i].hitBoxDefaultX;
+                    this.gamePanel.monsters[i].hitBox.y = this.gamePanel.monsters[i].hitBoxDefaultY;
+                }
+            }
+        }
+    }
 }

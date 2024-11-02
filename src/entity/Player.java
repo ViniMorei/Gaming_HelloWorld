@@ -101,6 +101,18 @@ public class Player extends Entity {
                         this.collisionOn = true;
                     }
                     break;
+                case "Heart":
+                    if (this.health < this.maxHealth) {
+                        this.health++;
+                    }
+                    this.gamePanel.objects[index] = null;
+                    break;
+                case "Crystal":
+                    if (this.mana < this.maxMana) {
+                        this.mana++;
+                    }
+                    this.gamePanel.objects[index] = null;
+                    break;
                 default:
                     this.gamePanel.objects[index] = null;
                     break;
@@ -116,6 +128,10 @@ public class Player extends Entity {
         // Então se os atributos worldY ou worldX do jogador forem alterados, o
         // mapa será redesenhado de acordo com essas coordenadas. Pois a entidade
         // jogador fica fixa no centro da tela e tudo se move ao seu redor
+        if (this.health == 0) {
+            this.gamePanel.gameState = this.gamePanel.GAME_OVER_STATE;
+        }
+
         if (keyHandler.upPressed){
             this.direction = "up";
         } else if (keyHandler.downPressed){
@@ -129,6 +145,7 @@ public class Player extends Entity {
         // Verifica se há colisão
         this.collisionOn = false;
         this.gamePanel.cChecker.checkTile(this);
+        this.gamePanel.cChecker.checkMonster(this, true);
 
         int objIndex = this.gamePanel.cChecker.checkObject(this, true);
         pickUpObject(objIndex);
@@ -164,6 +181,14 @@ public class Player extends Entity {
                 this.spriteNum = 1;
             }
             this.spriteCounter = 0;
+        }
+
+        if (this.invincible) {
+            this.invincibleTime ++ ;
+            if (this.invincibleTime == 60) {
+                this.invincible = false;
+                this.invincibleTime = 0;
+            }
         }
     }
 
@@ -207,6 +232,10 @@ public class Player extends Entity {
                 break;
         }
 
+        if (this.invincible) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f));
+        }
         g2.drawImage(image, this.screenX, this.screenY, this.gamePanel.tileSize, this.gamePanel.tileSize, null );
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
     }
 }

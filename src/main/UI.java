@@ -76,7 +76,8 @@ public class UI {
             g2.drawImage(heartImage, x, y, this.gamePanel.tileSize, this.gamePanel.tileSize, null);
             x += this.gamePanel.tileSize;
         }
-        x += this.gamePanel.tileSize * 9; // Desenhar os cristais da extremidade direita até o centro da tela
+        // Desenhar os cristais da extremidade direita até o centro da tela
+        x = this.gamePanel.screenWidth - (this.gamePanel.tileSize + 16);
 
         // Desenhar cristais de magia
         for (int i = 0; i < this.gamePanel.player.mana; i++){

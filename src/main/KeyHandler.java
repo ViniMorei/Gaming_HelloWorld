@@ -44,20 +44,6 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_M){
             this.gamePanel.playSFX(0);
         }
-
-        // Debug
-        if (code == KeyEvent.VK_K) {
-            this.gamePanel.player.health--;
-        }
-        if (code == KeyEvent.VK_L) {
-            this.gamePanel.player.health++;
-        }
-        if (code == KeyEvent.VK_I) {
-            this.gamePanel.player.mana--;
-        }
-        if (code == KeyEvent.VK_O) {
-            this.gamePanel.player.mana++;
-        }
     }
 
 

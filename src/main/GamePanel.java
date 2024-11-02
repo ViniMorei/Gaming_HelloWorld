@@ -109,7 +109,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameState == PAUSE_STATE) {
 
         }
-        if (gameState == FINISHED_STATE) {
+        if (gameState == FINISHED_STATE || gameState == GAME_OVER_STATE) {
             this.gameThread = null;
         }
     }

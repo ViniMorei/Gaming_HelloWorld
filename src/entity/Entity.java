@@ -30,6 +30,10 @@ public abstract class Entity {
     public int hitBoxDefaultX, hitBoxDefaultY;
     public boolean collisionOn = false;
 
+    // Tempo invencível para evitar dano elevado por frame
+    public boolean invincible = false;
+    public int invincibleTime = 0;
+
 
     // Construtor
     public Entity (GamePanel gamePanel) {
