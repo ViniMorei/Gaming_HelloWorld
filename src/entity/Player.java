@@ -134,6 +134,13 @@ public class Player extends Entity {
         }
     }
 
+    public void summon() {
+        if (currentAttack == null || !currentAttack.isActive()) {
+            currentAttack = Summon.createFromPlayer(this);
+            this.mana--;
+        }
+    }
+
 
     // Atualizar as informações do jogador
     public void update() {
@@ -161,6 +168,8 @@ public class Player extends Entity {
             scratch();
         } else if (keyHandler.projectilePressed) {
             cast();
+        } else if (keyHandler.summonPressed && this.mana > 0) {
+            summon();
         }
 
         // Verifica se há colisão

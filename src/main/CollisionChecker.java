@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+import attack.Attack;
 
 public class CollisionChecker {
     GamePanel gamePanel;
@@ -205,6 +206,55 @@ public class CollisionChecker {
 
                     entity.hitBox.x = entity.hitBoxDefaultX;
                     entity.hitBox.y = entity.hitBoxDefaultY;
+                    this.gamePanel.monsters[i].hitBox.x = this.gamePanel.monsters[i].hitBoxDefaultX;
+                    this.gamePanel.monsters[i].hitBox.y = this.gamePanel.monsters[i].hitBoxDefaultY;
+                }
+            }
+        }
+    }
+
+    // Versão alternativa do checkMonster para verificar se
+    // algum ataque (projétil ou estático) colidiu com um monstro
+    public void checkMonster(Attack attack) {
+        for (int i = 0; i < this.gamePanel.monsters.length; i++) {
+            if (this.gamePanel.monsters[i] != null) {
+                attack.hitBox.x = attack.worldX + attack.hitBox.x;
+                attack.hitBox.y = attack.worldY + attack.hitBox.y;
+
+                this.gamePanel.monsters[i].hitBox.x = this.gamePanel.monsters[i].worldX + this.gamePanel.monsters[i].hitBox.x;
+                this.gamePanel.monsters[i].hitBox.y = this.gamePanel.monsters[i].worldY + this.gamePanel.monsters[i].hitBox.y;
+
+                switch(attack.direction) {
+                    // Por enquanto, o mosntro morre imediatamente ao ser atacado
+                    case "up":
+                        attack.hitBox.y -= attack.speed;
+                        if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
+                            this.gamePanel.monsters[i] = null;
+                        }
+                        break;
+                    case "down":
+                        attack.hitBox.y += attack.speed;
+                        if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
+                            this.gamePanel.monsters[i] = null;
+                        }
+                        break;
+                    case "left":
+                        attack.hitBox.x -= attack.speed;
+                        if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
+                            this.gamePanel.monsters[i] = null;
+                        }
+                        break;
+                    case "right":
+                        attack.hitBox.x += attack.speed;
+                        if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
+                            this.gamePanel.monsters[i] = null;
+                        }
+                        break;
+                }
+
+                attack.hitBox.x = attack.hitBoxDefaultX;
+                attack.hitBox.y = attack.hitBoxDefaultY;
+                if (this.gamePanel.monsters[i] != null) {
                     this.gamePanel.monsters[i].hitBox.x = this.gamePanel.monsters[i].hitBoxDefaultX;
                     this.gamePanel.monsters[i].hitBox.y = this.gamePanel.monsters[i].hitBoxDefaultY;
                 }

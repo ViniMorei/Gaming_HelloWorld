@@ -5,14 +5,14 @@ import main.GamePanel;
 
 import java.awt.*;
 
-public class Projectile extends Attack{
-    public Projectile(int worldX, int worldY, String direction, int maxCounter, int speed, GamePanel gamePanel) {
+public class Summon extends Attack {
+    public Projectile fireball;
+    public Summon(int worldX, int worldY, String direction, GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         this.worldX = worldX;
         this.worldY = worldY;
         this.direction = direction;
-        this.maxCounter = maxCounter;
-        this.speed = speed;
+        this.maxCounter = 60;
 
         this.hitBox = new Rectangle();
         this.hitBox.x = 0;
@@ -24,7 +24,7 @@ public class Projectile extends Attack{
     }
 
 
-    public static Projectile createFromPlayer(Player player) {
+    public static Summon createFromPlayer(Player player) {
         int worldX = player.worldX;
         int worldY = player.worldY;
         String direction = player.direction;
@@ -36,43 +36,27 @@ public class Projectile extends Attack{
             case "right": worldX += player.gamePanel.tileSize; break;
         }
 
-        return new Projectile(worldX, worldY, direction, 60, 5, player.gamePanel);
-    }
-
-
-    public static Projectile createFromSummon(Attack summon) {
-        int worldX = summon.worldX;
-        int worldY = summon.worldY;
-        String direction = summon.direction;
-
-        switch(direction) {
-            case "up": worldY -= summon.gamePanel.tileSize; break;
-            case "down": worldY += summon.gamePanel.tileSize; break;
-            case "left": worldX -= summon.gamePanel.tileSize; break;
-            case "right": worldX += summon.gamePanel.tileSize; break;
-        }
-
-        return new Projectile(worldX, worldY, direction, 60, 5, summon.gamePanel);
+        return new Summon(worldX, worldY, direction, player.gamePanel);
     }
 
 
     @Override
     public void update() {
-        switch (direction) {
-            case "up": worldY -= speed; break;
-            case "down": worldY += speed; break;
-            case "left": worldX -= speed; break;
-            case "right": worldX += speed; break;
+        if (counter == 0) {
+            fireball = Projectile.createFromSummon(this);
         }
         this.gamePanel.cChecker.checkMonster(this);
         incrementCounter();
+        fireball.update();
     }
 
     @Override
     public void draw(Graphics2D g2) {
         int screenX = this.worldX - this.gamePanel.player.worldX + this.gamePanel.player.screenX;
         int screenY = this.worldY - this.gamePanel.player.worldY + this.gamePanel.player.screenY;
-        g2.setColor(Color.blue);
-        g2.fillOval(screenX, screenY, 46, 46);
+
+        g2.setColor(Color.yellow);
+        g2.fillRect(screenX, screenY, 46, 46);
+        fireball.draw(g2);
     }
 }
