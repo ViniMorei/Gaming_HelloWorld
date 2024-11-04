@@ -2,13 +2,10 @@ package entity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
-import javax.imageio.ImageIO;
 
+import attack.*;
 import main.KeyHandler;
 import main.GamePanel;
-import main.Utils;
 
 public class Player extends Entity {
     // Capturar entradas do teclado para movimentação
@@ -22,6 +19,8 @@ public class Player extends Entity {
     public int keys, chests;
     public int maxHealth, health;
     public int maxMana, mana;
+    public boolean attacking;
+    public Attack currentAttack;
 
     // Construtor
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
@@ -62,6 +61,8 @@ public class Player extends Entity {
         this.mana = maxMana;
         this.chests = 4;
         this.keys = 0;
+
+        this.attacking = false;
     }
 
 
@@ -120,6 +121,20 @@ public class Player extends Entity {
         }
     }
 
+
+    public void scratch() {
+        if (currentAttack == null || !currentAttack.isActive()) {
+            currentAttack = Scratch.createFromPlayer(this);
+        }
+    }
+
+    public void cast() {
+        if (currentAttack == null || !currentAttack.isActive()) {
+            currentAttack = Projectile.createFromPlayer(this);
+        }
+    }
+
+
     // Atualizar as informações do jogador
     public void update() {
         // Breve explicação:
@@ -140,6 +155,12 @@ public class Player extends Entity {
             this.direction = "left";
         } else if (keyHandler.rightPressed){
             this.direction = "right";
+        }
+
+        if (keyHandler.scratchPressed){
+            scratch();
+        } else if (keyHandler.projectilePressed) {
+            cast();
         }
 
         // Verifica se há colisão
@@ -189,6 +210,12 @@ public class Player extends Entity {
                 this.invincible = false;
                 this.invincibleTime = 0;
             }
+        }
+
+        if (currentAttack != null && currentAttack.isActive()) {
+            currentAttack.update();
+        } else {
+            currentAttack = null;
         }
     }
 

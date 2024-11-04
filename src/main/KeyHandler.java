@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     public boolean upPressed, leftPressed, downPressed, rightPressed;
+    public boolean scratchPressed, projectilePressed;
     GamePanel gamePanel;
 
     public KeyHandler(GamePanel gamePanel) {
@@ -34,6 +35,12 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
             rightPressed = true;
         }
+        if (code == KeyEvent.VK_J) {
+            scratchPressed = true;
+        }
+        if (code == KeyEvent.VK_K) {
+            projectilePressed = true;
+        }
         if (code == KeyEvent.VK_P){
             if (this.gamePanel.gameState == this.gamePanel.PLAY_STATE) {
                 this.gamePanel.gameState = gamePanel.PAUSE_STATE;
@@ -62,6 +69,12 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
             rightPressed = false;
+        }
+        if (code == KeyEvent.VK_J) {
+            scratchPressed = false;
+        }
+        if (code == KeyEvent.VK_K) {
+            projectilePressed = false;
         }
     }
 }

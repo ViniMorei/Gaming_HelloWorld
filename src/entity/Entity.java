@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public abstract class Entity {
-    GamePanel gamePanel;
+    public GamePanel gamePanel;
 
     // Atributos padrão (posição e velocidade)
     public int worldX, worldY; // Define onde no mapa a entidade será exibida

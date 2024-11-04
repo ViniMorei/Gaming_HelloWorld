@@ -3,6 +3,7 @@ package main;
 import java.awt.*;
 import javax.swing.JPanel;
 
+import attack.Attack;
 import entity.*;
 import object.GameObject;
 import tile.TileManager;
@@ -22,8 +23,6 @@ public class GamePanel extends JPanel implements Runnable {
     // Configurações do World Map
     public final int maxWorldColumns = 55;
     public final int maxWorldRows = 55;
-    public final int worldWidth = tileSize * maxWorldColumns;
-    public final int worldHeight = tileSize * maxWorldRows;
 
     // Configurações do jogo
     Thread gameThread;
@@ -134,6 +133,11 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
         player.draw(g2);
+        Attack currentAttack = this.player.currentAttack;
+        if (currentAttack != null && currentAttack.isActive()) {
+            currentAttack.draw(g2);
+        }
+
         ui.draw(g2);
 
         g2.dispose();
