@@ -4,8 +4,13 @@ import entity.Player;
 import main.GamePanel;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 
 public class Projectile extends Attack{
+    public int spriteCounter = 0;
+    public int spriteNum = 1;
+
     public Projectile(int worldX, int worldY, String direction, int maxCounter, int speed, GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         this.worldX = worldX;
@@ -21,6 +26,8 @@ public class Projectile extends Attack{
         this.hitBox.height = gamePanel.tileSize;
         this.hitBoxDefaultX = 0;
         this.hitBoxDefaultY = 0;
+
+        getFireBallImages();
     }
 
 
@@ -36,7 +43,7 @@ public class Projectile extends Attack{
             case "right": worldX += player.gamePanel.tileSize; break;
         }
 
-        return new Projectile(worldX, worldY, direction, 60, 5, player.gamePanel);
+        return new Projectile(worldX, worldY, direction, 90, 8, player.gamePanel);
     }
 
 
@@ -52,7 +59,19 @@ public class Projectile extends Attack{
             case "right": worldX += summon.gamePanel.tileSize; break;
         }
 
-        return new Projectile(worldX, worldY, direction, 60, 5, summon.gamePanel);
+        return new Projectile(worldX, worldY, direction, 60, 8, summon.gamePanel);
+    }
+
+
+    public void getFireBallImages() {
+        this.up1 = setupSprite("/attacks/fireball_up_01.png");
+        this.up2 = setupSprite("/attacks/fireball_up_02.png");
+        this.down1 = setupSprite("/attacks/fireball_down_01.png");
+        this.down2 = setupSprite("/attacks/fireball_down_02.png");
+        this.left1 = setupSprite("/attacks/fireball_left_01.png");
+        this.left2 = setupSprite("/attacks/fireball_left_02.png");
+        this.right1 = setupSprite("/attacks/fireball_right_01.png");
+        this.right2 = setupSprite("/attacks/fireball_right_02.png");
     }
 
 
@@ -66,13 +85,55 @@ public class Projectile extends Attack{
         }
         this.gamePanel.cChecker.checkMonster(this);
         incrementCounter();
+
+        this.spriteCounter++ ;
+        if (this.spriteCounter > 10) {
+            if (this.spriteNum == 1) {
+                this.spriteNum = 2;
+            } else if (this.spriteNum == 2) {
+                this.spriteNum = 1;
+            }
+            this.spriteCounter = 0;
+        }
     }
 
     @Override
     public void draw(Graphics2D g2) {
         int screenX = this.worldX - this.gamePanel.player.worldX + this.gamePanel.player.screenX;
         int screenY = this.worldY - this.gamePanel.player.worldY + this.gamePanel.player.screenY;
-        g2.setColor(Color.blue);
-        g2.fillOval(screenX, screenY, 46, 46);
+        BufferedImage image = null;
+
+        switch(this.direction) {
+            case "up":
+                if (this.spriteNum == 1){
+                    image = this.up1;
+                } else if (this.spriteNum == 2){
+                    image = this.up2;
+                }
+                break;
+            case "down":
+                if (this.spriteNum == 1){
+                    image = this.down1;
+                } else if (this.spriteNum == 2){
+                    image = this.down2;
+                }
+                break;
+            case "left":
+                if (this.spriteNum == 1){
+                    image = this.left1;
+                } else if (this.spriteNum == 2){
+                    image = this.left2;
+                }
+                break;
+            case "right":
+                if (this.spriteNum == 1){
+                    image = this.right1;
+                } else if (this.spriteNum == 2){
+                    image = this.right2;
+                }
+                break;
+        }
+
+        g2.drawImage(image, screenX, screenY, null);
     }
 }
