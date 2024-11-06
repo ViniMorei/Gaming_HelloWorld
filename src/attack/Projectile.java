@@ -11,7 +11,7 @@ public class Projectile extends Attack{
     public int spriteCounter = 0;
     public int spriteNum = 1;
 
-    public Projectile(int worldX, int worldY, String direction, int maxCounter, int speed, GamePanel gamePanel) {
+    public Projectile(int worldX, int worldY, String direction, int maxCounter, int speed, GamePanel gamePanel, String name) {
         this.gamePanel = gamePanel;
         this.worldX = worldX;
         this.worldY = worldY;
@@ -27,7 +27,20 @@ public class Projectile extends Attack{
         this.hitBoxDefaultX = 0;
         this.hitBoxDefaultY = 0;
 
-        getFireBallImages();
+        switch(name) {
+            case "Fire Summon":
+                getFireBallImages();
+                break;
+            case "Ice Summon":
+                getSnowflakeImages();
+                break;
+            case "Lightning Summon":
+                getLightningBoltImages();
+                break;
+            default:
+                getFireBallImages();
+                break;
+        }
     }
 
 
@@ -35,6 +48,7 @@ public class Projectile extends Attack{
         int worldX = player.worldX;
         int worldY = player.worldY;
         String direction = player.direction;
+        String name = "";
 
         switch(direction) {
             case "up": worldY -= player.gamePanel.tileSize; break;
@@ -43,7 +57,7 @@ public class Projectile extends Attack{
             case "right": worldX += player.gamePanel.tileSize; break;
         }
 
-        return new Projectile(worldX, worldY, direction, 90, 8, player.gamePanel);
+        return new Projectile(worldX, worldY, direction, 90, 8, player.gamePanel, name);
     }
 
 
@@ -51,15 +65,16 @@ public class Projectile extends Attack{
         int worldX = summon.worldX;
         int worldY = summon.worldY;
         String direction = summon.direction;
+        String name = summon.name;
 
         switch(direction) {
             case "up": worldY -= summon.gamePanel.tileSize; break;
             case "down": worldY += summon.gamePanel.tileSize; break;
-            case "left": worldX -= summon.gamePanel.tileSize; break;
-            case "right": worldX += summon.gamePanel.tileSize; break;
+            case "left": worldX -= summon.gamePanel.tileSize; worldY += summon.gamePanel.tileSize / 2; break;
+            case "right": worldX += summon.gamePanel.tileSize; worldY += summon.gamePanel.tileSize / 2; break;
         }
 
-        return new Projectile(worldX, worldY, direction, 60, 8, summon.gamePanel);
+        return new Projectile(worldX, worldY, direction, 90, 8, summon.gamePanel, name);
     }
 
 
@@ -74,6 +89,29 @@ public class Projectile extends Attack{
         this.right2 = setupSprite("/attacks/fireball_right_02.png");
     }
 
+
+    public void getSnowflakeImages() {
+        this.up1 = setupSprite("/attacks/snow_01.png");
+        this.up2 = setupSprite("/attacks/snow_02.png");
+        this.down1 = setupSprite("/attacks/snow_01.png");
+        this.down2 = setupSprite("/attacks/snow_02.png");
+        this.left1 = setupSprite("/attacks/snow_01.png");
+        this.left2 = setupSprite("/attacks/snow_02.png");
+        this.right1 = setupSprite("/attacks/snow_01.png");
+        this.right2 = setupSprite("/attacks/snow_02.png");
+    }
+
+
+    public void getLightningBoltImages() {
+        this.up1 = setupSprite("/attacks/lightning_up_01.png");
+        this.up2 = setupSprite("/attacks/lightning_up_02.png");
+        this.down1 = setupSprite("/attacks/lightning_up_01.png");
+        this.down2 = setupSprite("/attacks/lightning_up_02.png");
+        this.left1 = setupSprite("/attacks/lightning_right_01.png");
+        this.left2 = setupSprite("/attacks/lightning_right_02.png");
+        this.right1 = setupSprite("/attacks/lightning_right_01.png");
+        this.right2 = setupSprite("/attacks/lightning_right_02.png");
+    }
 
     @Override
     public void update() {

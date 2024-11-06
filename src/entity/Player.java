@@ -134,9 +134,25 @@ public class Player extends Entity {
         }
     }
 
-    public void summon() {
+    public void summonFire() {
         if (currentAttack == null || !currentAttack.isActive()) {
-            currentAttack = Summon.createFromPlayer(this);
+            currentAttack = Summon.createFromPlayer(this, "Fire");
+            this.mana--;
+        }
+    }
+
+
+    public void summonIce() {
+        if (currentAttack == null || !currentAttack.isActive()) {
+            currentAttack = Summon.createFromPlayer(this, "Ice");
+            this.mana--;
+        }
+    }
+
+
+    public void summonLightning() {
+        if (currentAttack == null || !currentAttack.isActive()) {
+            currentAttack = Summon.createFromPlayer(this, "Lightning");
             this.mana--;
         }
     }
@@ -166,10 +182,12 @@ public class Player extends Entity {
 
         if (keyHandler.scratchPressed){
             scratch();
-        } else if (keyHandler.projectilePressed) {
-            cast();
-        } else if (keyHandler.summonPressed && this.mana > 0) {
-            summon();
+        } else if (keyHandler.fireSummonPressed && this.mana > 0) {
+            summonFire();
+        } else if (keyHandler.iceSummonPressed && this.mana > 0) {
+            summonIce();
+        } else if (keyHandler.lightningSummonPressed && this.mana > 0) {
+            summonLightning();
         }
 
         // Verifica se há colisão

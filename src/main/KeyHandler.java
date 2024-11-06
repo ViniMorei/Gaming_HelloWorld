@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     public boolean upPressed, leftPressed, downPressed, rightPressed;
-    public boolean scratchPressed, projectilePressed, summonPressed;
+    public boolean scratchPressed, fireSummonPressed, iceSummonPressed, lightningSummonPressed;
     GamePanel gamePanel;
 
     public KeyHandler(GamePanel gamePanel) {
@@ -39,10 +39,13 @@ public class KeyHandler implements KeyListener {
             scratchPressed = true;
         }
         if (code == KeyEvent.VK_K) {
-            projectilePressed = true;
+            fireSummonPressed = true;
         }
-        if (code == KeyEvent.VK_L) {
-            summonPressed = true;
+        if (code == KeyEvent.VK_U) {
+            iceSummonPressed = true;
+        }
+        if (code == KeyEvent.VK_I) {
+            lightningSummonPressed = true;
         }
         if (code == KeyEvent.VK_P){
             if (this.gamePanel.gameState == this.gamePanel.PLAY_STATE) {
@@ -77,10 +80,13 @@ public class KeyHandler implements KeyListener {
             scratchPressed = false;
         }
         if (code == KeyEvent.VK_K) {
-            projectilePressed = false;
+            fireSummonPressed = false;
         }
-        if (code == KeyEvent.VK_L) {
-            summonPressed = false;
+        if (code == KeyEvent.VK_U) {
+            iceSummonPressed = false;
+        }
+        if (code == KeyEvent.VK_I) {
+            lightningSummonPressed = false;
         }
     }
 }

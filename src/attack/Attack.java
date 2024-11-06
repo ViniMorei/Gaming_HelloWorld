@@ -11,6 +11,7 @@ import java.util.Objects;
 
 public abstract class Attack {
     public GamePanel gamePanel;
+    public String name;
     public BufferedImage up1, up2, down1, down2, right1, right2, left1, left2;
 
     public int worldX, worldY;

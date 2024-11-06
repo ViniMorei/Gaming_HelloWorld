@@ -42,14 +42,14 @@ public class Scratch extends Attack {
 
 
     public void getScratchImages() {
-        this.up1 = setupSprite("/objects/scratch.png");
-        this.up2 = setupSprite("/objects/scratch.png");
-        this.down1 = setupSprite("/objects/scratch.png");
-        this.down2 = setupSprite("/objects/scratch.png");
-        this.left1 = setupSprite("/objects/scratch.png");
-        this.left2 = setupSprite("/objects/scratch.png");
-        this.right1 = setupSprite("/objects/scratch.png");
-        this.right2 = setupSprite("/objects/scratch.png");
+        this.up1 = setupSprite("/attacks/scratch.png");
+        this.up2 = setupSprite("/attacks/scratch.png");
+        this.down1 = setupSprite("/attacks/scratch.png");
+        this.down2 = setupSprite("/attacks/scratch.png");
+        this.left1 = setupSprite("/attacks/scratch.png");
+        this.left2 = setupSprite("/attacks/scratch.png");
+        this.right1 = setupSprite("/attacks/scratch.png");
+        this.right2 = setupSprite("/attacks/scratch.png");
     }
 
 
@@ -64,8 +64,8 @@ public class Scratch extends Attack {
         int screenX = this.worldX - this.gamePanel.player.worldX + this.gamePanel.player.screenX;
         int screenY = this.worldY - this.gamePanel.player.worldY + this.gamePanel.player.screenY;
 
-//        g2.drawImage(this.up1, screenX, screenY, null);
-        g2.setColor(Color.red);
-        g2.fillRect(screenX, screenY, 46, 46);
+        g2.drawImage(this.up1, screenX, screenY, null);
+//        g2.setColor(Color.red);
+//        g2.fillRect(screenX, screenY, 46, 46);
     }
 }
