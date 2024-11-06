@@ -38,30 +38,24 @@ derrotando o máximo de inimigos e coletando o máximo de itens.
 
 **J** - Arranhar
 
-**K** - Magia de fogo (A ser implementado)
+**K** - Magia de fogo
 
-**U** - Magia de gelo (A ser implementado)
+**U** - Magia de gelo
 
-**I** - Magia de eletricidade (A ser implementado)
+**I** - Magia de eletricidade
 
 ### Personagens e inimigos
 
-| <img src="resources\previews\cat.gif"/>                  | <img src="resources\previews\slime.gif"/> | <img src="resources\previews\mimic.gif"/> |
-|----------------------------------------------------------|-------------------------------------------|-------------------------------------------|
-| <div align=center>Meg</div>                              | <div align=center>Slime</div>             | <div align=center>Mimic</div>             |
-| Personagem principal. Pode<br/> invocar seres elementais | Uma meleca                                | Um baú falso                              |
+| <img src="resources/previews/cat.gif"/>                  | <img src="resources/previews/slime.gif"/> | <img src="resources/previews/mimic.gif"/> | <img src="resources/previews/cat.gif"/> |
+|----------------------------------------------------------|-------------------------------------------|-------------------------------------------|-----------------------------------------|
+| <div align=center>Meg</div>                              | <div align=center>Slime</div>             | <div align=center>Mimic</div>             | <div align=center>Fire Summon</div>     |
+| Personagem principal. Pode<br/> invocar seres elementais | Uma meleca                                | Um baú falso                              | Invocação de fogo da Meg                |
 
 
 
 ## Algoritmo de geração de labirintos
 
-### _Binary Tree Algorhitm_ 
-
-Este algoritmo é bem simples. Dentro de uma matriz, percorre-se
-cada uma das "casas" e, aleatoriamente, conecta com a casa norte
-ou com a casa oeste, abrindo um caminho entre elas. Aonde não há
-caminhos abertos, é como se fosse uma parede
-
-### _Hunt and Kill_
-
-(A ser implementado)
+| **_Binary Tree_**                                                                                                                                                                                                                                                                                                                                                                                 | **_Hunt and Kill_**                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Esse algoritmo consiste em percorrer uma matriz (Labirinto), e, para cada elemento (Célula / Casa), o algoritmo abre um caminho aleatoriamente com o vizinho "norte" ou "oeste", com o layout final se assemelhando a uma árvore binária, onde cada nó só tem dois filhos. O labirinto gerado por esse labirinto tem a limitação de ser um pouco previsível e ter dois lados completamente vazios | Este algoritmo consiste em visitar um elemento aleatório da matriz, e em seguida abrir um caminho com uma célula vizinha que não foi visitada ainda. Caso o algoritmo chegue em um ponto onde não há mais células que não foram visitadas ao redor, o algoritmo entra no modo _Hunt_, onde ele busca uma célula não visitada que possui pelo menos um vizinho que já foi visitado, abre caminho entre eles e volta ao modo Kill, até todas as células serem visitadas |
+| <div align=center> <img width="200" src="resources/previews/BinaryTree.jpg" alt="Labirinto Binary Tree"/> </div>                                                                                                                                                                                                                                                                                  | <div align=center> <img align=center width="200" src="resources/previews/HuntAndKill.jpg" alt="Labirinto Hunt and Kill"/> </div>                                                                                                                                                                                                                                                                                                                                      |
