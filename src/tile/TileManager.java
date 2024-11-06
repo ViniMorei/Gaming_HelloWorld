@@ -9,11 +9,11 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import main.GamePanel;
 import main.Utils;
 import maze.BinaryTreeMaze;
+import maze.HuntAndKillMaze;
 
 public class TileManager {
     public GamePanel gamePanel;
@@ -106,7 +106,7 @@ public class TileManager {
 
     // Gerar um labirinto
     public void getMaze() {
-        BinaryTreeMaze maze = new BinaryTreeMaze((this.gamePanel.maxWorldRows - 1) / 2, (this.gamePanel.maxWorldColumns - 1) / 2);
+        HuntAndKillMaze maze = new HuntAndKillMaze((this.gamePanel.maxWorldRows - 1) / 2, (this.gamePanel.maxWorldColumns - 1) / 2);
         // Random random = new Random();
         int [][] tileMap = maze.toTileMap();
 
