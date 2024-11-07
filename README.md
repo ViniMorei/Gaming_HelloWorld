@@ -46,10 +46,10 @@ derrotando o máximo de inimigos e coletando o máximo de itens.
 
 ### Personagens e inimigos
 
-| <img src="resources/previews/cat.gif"/>                  | <img src="resources/previews/slime.gif"/> | <img src="resources/previews/mimic.gif"/> | <img src="resources/previews/cat.gif"/> |
-|----------------------------------------------------------|-------------------------------------------|-------------------------------------------|-----------------------------------------|
-| <div align=center>Meg</div>                              | <div align=center>Slime</div>             | <div align=center>Mimic</div>             | <div align=center>Fire Summon</div>     |
-| Personagem principal. Pode<br/> invocar seres elementais | Uma meleca                                | Um baú falso                              | Invocação de fogo da Meg                |
+| <img src="resources/previews/cat.gif"/>                  | <img src="resources/previews/slime.gif"/> | <img src="resources/previews/mimic.gif"/> | <img src="resources/previews/FS_down.gif"/> |
+|----------------------------------------------------------|-------------------------------------------|-------------------------------------------|---------------------------------------------|
+| <div align=center>Meg</div>                              | <div align=center>Slime</div>             | <div align=center>Mimic</div>             | <div align=center>Fire Summon</div>         |
+| Personagem principal. Pode<br/> invocar seres elementais | Uma meleca                                | Um baú falso                              | Invocação de fogo da Meg                    |
 
 
 
