@@ -41,11 +41,15 @@ public class KeyHandler implements KeyListener {
                 if (this.gamePanel.ui.titleScreenSelector == 0) {
                     this.gamePanel.hard = false;
                     this.gamePanel.tileManager.getMaze();
+                    this.gamePanel.assets.setObjects();
+                    this.gamePanel.assets.setMonsters();
                     this.gamePanel.gameState = this.gamePanel.PLAY_STATE;
 
                 } else if (this.gamePanel.ui.titleScreenSelector == 1) {
                     this.gamePanel.hard = true;
                     this.gamePanel.tileManager.getMaze();
+                    this.gamePanel.assets.setObjects();
+                    this.gamePanel.assets.setMonsters();
                     this.gamePanel.gameState = this.gamePanel.PLAY_STATE;
 
                 } else if (this.gamePanel.ui.titleScreenSelector == 2) {

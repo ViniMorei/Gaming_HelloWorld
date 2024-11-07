@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Gaming_HelloWorld:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Gaming_HelloWorld_jar</output-path>
+    <root id="archive" name="Gaming_HelloWorld.jar">
+      <element id="module-output" name="Gaming_HelloWorld" />
+    </root>
+  </artifact>
+</component>

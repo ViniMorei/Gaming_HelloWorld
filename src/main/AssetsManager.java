@@ -38,12 +38,6 @@ public class AssetsManager {
     }
 
 
-    // Instanciar NPCs
-    public void setNPCs() {
-
-    }
-
-
     // Instanciar monstros
     public void setMonsters() {
         Utils utils = new Utils();

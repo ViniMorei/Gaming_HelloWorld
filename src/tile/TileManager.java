@@ -110,13 +110,12 @@ public class TileManager {
         Maze maze;
         if (this.gamePanel.hard) {
             maze = new HuntAndKillMaze((this.gamePanel.maxWorldRows - 1) / 2, (this.gamePanel.maxWorldColumns - 1) / 2);
-            System.out.println("Hunt and Kill");
         } else {
             maze = new BinaryTreeMaze((this.gamePanel.maxWorldRows - 1) / 2, (this.gamePanel.maxWorldColumns - 1) / 2);
-            System.out.println("Binary Tree");
         }
         // Random random = new Random();
         int [][] tileMap = maze.toTileMap();
+        this.pathTiles.clear();
 
         for (int i = 0; i < this.gamePanel.maxWorldRows; i++) {
             for (int j = 0; j < this.gamePanel.maxWorldColumns; j++) {
