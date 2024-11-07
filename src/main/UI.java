@@ -15,10 +15,8 @@ public class UI {
     Graphics2D g2;
     Font ARIAL_40, ARIAL_40_BOLD;
     Font MP16REG;
-    BufferedImage keyImage;
-    BufferedImage chestImage;
-    BufferedImage heartImage;
-    BufferedImage crystalImage;
+    BufferedImage keyImage, chestImage, heartImage, crystalImage;
+    int titleScreenSelector = 0;
 
     // Construtor
     public UI(GamePanel gamePanel) {
@@ -51,6 +49,9 @@ public class UI {
         g2.setFont(MP16REG);
         g2.setColor(Color.white);
 
+        if (this.gamePanel.gameState == this.gamePanel.TITLE_STATE) {
+            drawTitleScreen();
+        }
         if (this.gamePanel.gameState == this.gamePanel.PLAY_STATE) {
             drawGameHUD();
         }
@@ -62,6 +63,52 @@ public class UI {
         }
         if (this.gamePanel.gameState == this.gamePanel.GAME_OVER_STATE) {
             drawGameOverScreen();
+        }
+    }
+
+
+    // Menu principal
+    public void drawTitleScreen() {
+        // Título
+        String text = "PURRANORMAL MAZE";
+        int x = this.gamePanel.screenWidth / 2 - 270;
+        int y = this.gamePanel.screenHeight / 2 - 150;
+
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 60));
+        g2.drawString(text, x, y);
+
+        // Imagem
+        BufferedImage image = this.gamePanel.monsters[0].down1;
+        x = this.gamePanel.screenWidth / 2 - image.getWidth();
+        y = this.gamePanel.screenHeight / 2 - image.getHeight();
+        g2.drawImage(image, x, y, image.getWidth() * 2, image.getHeight() * 2, null);
+
+        // Menu
+        text = "EASY";
+        x = this.gamePanel.screenWidth / 2 - 30;
+        y = this.gamePanel.screenHeight / 2 + 100;
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 30));
+        g2.drawString(text, x, y);
+        if (titleScreenSelector == 0) {
+            g2.drawString(">", x-this.gamePanel.tileSize, y);
+        }
+
+        text = "HARD";
+        x = this.gamePanel.screenWidth / 2 - 32;
+        y = this.gamePanel.screenHeight / 2 + 150;
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 30));
+        g2.drawString(text, x, y);
+        if (titleScreenSelector == 1) {
+            g2.drawString(">", x-this.gamePanel.tileSize, y);
+        }
+
+        text = "QUIT";
+        x = this.gamePanel.screenWidth / 2 - 27;
+        y = this.gamePanel.screenHeight / 2 + 220;
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 30));
+        g2.drawString(text, x, y);
+        if (titleScreenSelector == 2) {
+            g2.drawString(">", x-this.gamePanel.tileSize, y);
         }
     }
 

@@ -66,44 +66,6 @@ public class HuntAndKillMaze extends Maze {
     }
 
 
-    public int[][] toTileMap() {
-        int[][] tileMap;
-        Cell currentCell, cellEast, cellSouth;
-        int x, y;
-
-        // Declara uma matriz nula (todos os elementos iguais a zero)
-        tileMap = new int[numRows * 2 + 1][numColumns * 2 + 1];
-        // As células precisam de um espaço ao redor delas para servir como
-        // parede ou caminho, e o cálculo de * 2 + 1 faz essa transformação
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < numColumns; j++) {
-                // Por padrão, todas as células
-                // são caminho, e recebem o valor 1
-                x = i * 2 + 1;
-                y = j * 2 + 1;
-                tileMap[x][y] = 1;
-
-                currentCell = this.maze[i][j];
-                cellEast = currentCell.getNeighbour(1);
-                cellSouth = currentCell.getNeighbour(2);
-
-                // Verifica se as células vizinhas a leste e a sul
-                // estão conectadas. Caso sim, refletir isso no tilempa
-                if (currentCell.getNeighbour(1) != null
-                        && currentCell.links.contains(cellEast)) {
-                    tileMap[x][y + 1] = 1;
-                }
-                if (currentCell.getNeighbour(2) != null
-                        && currentCell.links.contains(cellSouth)) {
-                    tileMap[x + 1][y] = 1;
-                }
-            }
-        }
-
-        return tileMap;
-    }
-
-
     // Teste
     public static void main(String[] args) {
         HuntAndKillMaze huntAndKillMaze = new HuntAndKillMaze(10, 10);

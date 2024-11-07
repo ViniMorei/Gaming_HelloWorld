@@ -41,10 +41,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     // Game State
     public int gameState;
-    public final int FINISHED_STATE = 0;
+    public final int TITLE_STATE = 0;
     public final int PLAY_STATE = 1;
     public final int PAUSE_STATE = 2;
     public final int GAME_OVER_STATE = 3;
+    public final int FINISHED_STATE = 4;
+
+    // Dificuldade
+    public boolean hard = false;
 
 
     // Construtor
@@ -59,7 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public void setupGame() {
-        this.gameState = PLAY_STATE;
+        this.gameState = TITLE_STATE;
         this.assets.setObjects();
         this.assets.setMonsters();
     }
@@ -117,30 +121,33 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
 
-        Graphics2D g2 = (Graphics2D)g;
-
-        tileManager.drawBackground(g2);
-        tileManager.draw(g2);
-        for (int i = 0; i < objects.length; i++) {
-            if (objects[i] != null) {
-                objects[i].draw(g2);
+        if (gameState == TITLE_STATE) {
+            ui.draw(g2);
+        } else {
+            tileManager.drawBackground(g2);
+            tileManager.draw(g2);
+            for (int i = 0; i < objects.length; i++) {
+                if (objects[i] != null) {
+                    objects[i].draw(g2);
+                }
             }
-        }
-        for (int i = 0; i < monsters.length; i++) {
-            if (monsters[i] != null) {
-                monsters[i].draw(g2);
+            for (int i = 0; i < monsters.length; i++) {
+                if (monsters[i] != null) {
+                    monsters[i].draw(g2);
+                }
             }
-        }
-        player.draw(g2);
-        Attack currentAttack = this.player.currentAttack;
-        if (currentAttack != null && currentAttack.isActive()) {
-            currentAttack.draw(g2);
-        }
+            player.draw(g2);
+            Attack currentAttack = this.player.currentAttack;
+            if (currentAttack != null && currentAttack.isActive()) {
+                currentAttack.draw(g2);
+            }
 
-        ui.draw(g2);
+            ui.draw(g2);
 
-        g2.dispose();
+            g2.dispose();
+        }
     }
 
 

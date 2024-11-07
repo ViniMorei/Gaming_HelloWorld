@@ -14,6 +14,7 @@ import main.GamePanel;
 import main.Utils;
 import maze.BinaryTreeMaze;
 import maze.HuntAndKillMaze;
+import maze.Maze;
 
 public class TileManager {
     public GamePanel gamePanel;
@@ -106,7 +107,14 @@ public class TileManager {
 
     // Gerar um labirinto
     public void getMaze() {
-        HuntAndKillMaze maze = new HuntAndKillMaze((this.gamePanel.maxWorldRows - 1) / 2, (this.gamePanel.maxWorldColumns - 1) / 2);
+        Maze maze;
+        if (this.gamePanel.hard) {
+            maze = new HuntAndKillMaze((this.gamePanel.maxWorldRows - 1) / 2, (this.gamePanel.maxWorldColumns - 1) / 2);
+            System.out.println("Hunt and Kill");
+        } else {
+            maze = new BinaryTreeMaze((this.gamePanel.maxWorldRows - 1) / 2, (this.gamePanel.maxWorldColumns - 1) / 2);
+            System.out.println("Binary Tree");
+        }
         // Random random = new Random();
         int [][] tileMap = maze.toTileMap();
 
