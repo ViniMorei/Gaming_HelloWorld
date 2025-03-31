@@ -9,5 +9,6 @@ public class Lizard extends GameObject {
         this.image = setupSprite("/objects/lizard.png");
         this.worldX = this.gamePanel.tileSize * x;
         this.worldY = this.gamePanel.tileSize * y;
+        this.points = 1000;
     }
 }

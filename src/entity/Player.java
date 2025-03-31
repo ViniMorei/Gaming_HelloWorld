@@ -85,6 +85,8 @@ public class Player extends Entity {
     public void pickUpObject(int index) {
         if (index != 999) {
             String name = this.gamePanel.objects[index].name;
+            this.score += this.gamePanel.objects[index].points;
+            System.out.println("Current score:" + this.score);
 
             switch (name) {
                 case "Key":

@@ -10,5 +10,6 @@ public class Chest extends GameObject {
         this.worldX = this.gamePanel.tileSize * x;
         this.worldY = this.gamePanel.tileSize * y;
         this.collision = true;
+        this.points = 100;
     }
 }
