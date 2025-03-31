@@ -19,6 +19,7 @@ public class Player extends Entity {
     public int keys, chests;
     public int maxHealth, health;
     public int maxMana, mana;
+    public int score;
     public boolean attacking;
     public Attack currentAttack;
 
@@ -61,6 +62,7 @@ public class Player extends Entity {
         this.mana = maxMana;
         this.chests = 4;
         this.keys = 0;
+        this.score = 0;
 
         this.attacking = false;
     }

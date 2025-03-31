@@ -17,6 +17,7 @@ public abstract class GameObject {
     public int worldX, worldY;
     public Rectangle hitBox;
     public int hitBoxDefaultX, hitBoxDefaultY;
+    public int points;
     public boolean collision = false;
 
     // Construtor
