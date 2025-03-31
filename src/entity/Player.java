@@ -19,6 +19,7 @@ public class Player extends Entity {
     public int keys, chests;
     public int maxHealth, health;
     public int maxMana, mana;
+    public int score;
     public boolean attacking;
     public Attack currentAttack;
 
@@ -48,6 +49,7 @@ public class Player extends Entity {
 
     // Posição e velocidade inicial do jogador
     public void defineDefaultValues() {
+        this.name = "Player";
         // Inicializa o jogador na linha 1, coluna 1 do world map
         this.worldX = this.gamePanel.tileSize;
         this.worldY = this.gamePanel.tileSize;
@@ -61,6 +63,7 @@ public class Player extends Entity {
         this.mana = maxMana;
         this.chests = 4;
         this.keys = 0;
+        this.score = 0;
 
         this.attacking = false;
     }
@@ -83,6 +86,7 @@ public class Player extends Entity {
     public void pickUpObject(int index) {
         if (index != 999) {
             String name = this.gamePanel.objects[index].name;
+            this.score += this.gamePanel.objects[index].points;
 
             switch (name) {
                 case "Key":

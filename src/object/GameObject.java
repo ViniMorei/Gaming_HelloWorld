@@ -17,6 +17,7 @@ public abstract class GameObject {
     public int worldX, worldY;
     public Rectangle hitBox;
     public int hitBoxDefaultX, hitBoxDefaultY;
+    public int points;
     public boolean collision = false;
 
     // Construtor
@@ -25,6 +26,7 @@ public abstract class GameObject {
         this.hitBox = hitBox;
         this.hitBoxDefaultX = hitBox.x;
         this.hitBoxDefaultY = hitBox.y;
+        this.points = 0;
     }
 
     public GameObject(GamePanel gamePanel) {
@@ -34,6 +36,7 @@ public abstract class GameObject {
         this.hitBox.y = 0;
         this.hitBox.width = this.gamePanel.tileSize;
         this.hitBox.height = this.gamePanel.tileSize;
+        this.points = 0;
     }
 
     // Carregar o sprite

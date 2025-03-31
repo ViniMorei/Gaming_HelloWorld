@@ -9,6 +9,7 @@ public class Slime extends Entity {
     public Slime (GamePanel gamePanel, int x, int y) {
         super(gamePanel);
 
+        this.name = "Slime";
         this.direction = "down";
         this.speed = 1;
         this.worldX = this.gamePanel.tileSize * x;

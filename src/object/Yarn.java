@@ -9,5 +9,6 @@ public class Yarn extends GameObject {
         this.image = setupSprite("/objects/yarn.png");
         this.worldX = this.gamePanel.tileSize * x;
         this.worldY = this.gamePanel.tileSize * y;
+        this.points = 500;
     }
 }

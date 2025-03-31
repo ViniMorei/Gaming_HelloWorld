@@ -218,6 +218,13 @@ public class CollisionChecker {
     public void checkMonster(Attack attack) {
         for (int i = 0; i < this.gamePanel.monsters.length; i++) {
             if (this.gamePanel.monsters[i] != null) {
+                String monsterName = this.gamePanel.monsters[i].name;
+                int monsterPoints = switch (monsterName) {
+                    case "Mimic" -> 500;
+                    case "Slime" -> 250;
+                    default -> 0;
+                };
+
                 attack.hitBox.x = attack.worldX + attack.hitBox.x;
                 attack.hitBox.y = attack.worldY + attack.hitBox.y;
 
@@ -225,29 +232,33 @@ public class CollisionChecker {
                 this.gamePanel.monsters[i].hitBox.y = this.gamePanel.monsters[i].worldY + this.gamePanel.monsters[i].hitBox.y;
 
                 switch(attack.direction) {
-                    // Por enquanto, o mosntro morre imediatamente ao ser atacado
+                    // O monstro morre e pontua o player
                     case "up":
                         attack.hitBox.y -= attack.speed;
                         if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
                             this.gamePanel.monsters[i] = null;
+                            this.gamePanel.player.score += monsterPoints;
                         }
                         break;
                     case "down":
                         attack.hitBox.y += attack.speed;
                         if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
                             this.gamePanel.monsters[i] = null;
+                            this.gamePanel.player.score += monsterPoints;
                         }
                         break;
                     case "left":
                         attack.hitBox.x -= attack.speed;
                         if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
                             this.gamePanel.monsters[i] = null;
+                            this.gamePanel.player.score += monsterPoints;
                         }
                         break;
                     case "right":
                         attack.hitBox.x += attack.speed;
                         if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
                             this.gamePanel.monsters[i] = null;
+                            this.gamePanel.player.score += monsterPoints;
                         }
                         break;
                 }

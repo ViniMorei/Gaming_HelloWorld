@@ -9,6 +9,7 @@ public class Mimic extends Entity {
     public Mimic(GamePanel gamePanel, int x, int y) {
         super(gamePanel);
 
+        this.name = "Mimic";
         this.direction = "down";
         this.speed = 2;
         this.worldX = this.gamePanel.tileSize * x;
