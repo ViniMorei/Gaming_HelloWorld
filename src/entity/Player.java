@@ -49,6 +49,7 @@ public class Player extends Entity {
 
     // Posição e velocidade inicial do jogador
     public void defineDefaultValues() {
+        this.name = "Player";
         // Inicializa o jogador na linha 1, coluna 1 do world map
         this.worldX = this.gamePanel.tileSize;
         this.worldY = this.gamePanel.tileSize;
