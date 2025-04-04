@@ -22,6 +22,7 @@ public abstract class Attack {
     public int speed;
     public int maxCounter;
     public int counter = 0;
+    public boolean active = false;
 
 
     // Métodos abstratos
@@ -30,11 +31,14 @@ public abstract class Attack {
     public abstract void draw(Graphics2D g2);
 
     public boolean isActive() {
-        return counter < maxCounter;
+        return this.active;
     }
 
     public void incrementCounter() {
         counter++;
+        if (counter >= maxCounter) {
+            active = false;
+        }
     }
 
     public BufferedImage setupSprite(String fileName) {

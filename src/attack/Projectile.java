@@ -18,6 +18,7 @@ public class Projectile extends Attack{
         this.direction = direction;
         this.maxCounter = maxCounter;
         this.speed = speed;
+        this.active = true;
 
         this.hitBox = new Rectangle();
         this.hitBox.x = 0;

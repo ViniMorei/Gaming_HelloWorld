@@ -236,29 +236,49 @@ public class CollisionChecker {
                     case "up":
                         attack.hitBox.y -= attack.speed;
                         if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
-                            this.gamePanel.monsters[i] = null;
-                            this.gamePanel.player.score += monsterPoints;
+                            this.gamePanel.monsters[i].health--;
+                            this.gamePanel.player.currentAttack = null;
+
+                            if (this.gamePanel.monsters[i].health <= 0) {
+                                this.gamePanel.player.score += monsterPoints;
+                                this.gamePanel.monsters[i] = null;
+                            }
                         }
                         break;
                     case "down":
                         attack.hitBox.y += attack.speed;
                         if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
-                            this.gamePanel.monsters[i] = null;
-                            this.gamePanel.player.score += monsterPoints;
+                            this.gamePanel.monsters[i].health--;
+                            this.gamePanel.player.currentAttack = null;
+
+                            if (this.gamePanel.monsters[i].health <= 0) {
+                                this.gamePanel.player.score += monsterPoints;
+                                this.gamePanel.monsters[i] = null;
+                            }
                         }
                         break;
                     case "left":
                         attack.hitBox.x -= attack.speed;
                         if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
-                            this.gamePanel.monsters[i] = null;
-                            this.gamePanel.player.score += monsterPoints;
+                            this.gamePanel.monsters[i].health--;
+                            this.gamePanel.player.currentAttack = null;
+
+                            if (this.gamePanel.monsters[i].health <= 0) {
+                                this.gamePanel.player.score += monsterPoints;
+                                this.gamePanel.monsters[i] = null;
+                            }
                         }
                         break;
                     case "right":
                         attack.hitBox.x += attack.speed;
                         if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
-                            this.gamePanel.monsters[i] = null;
-                            this.gamePanel.player.score += monsterPoints;
+                            this.gamePanel.monsters[i].health--;
+                            this.gamePanel.player.currentAttack = null;
+
+                            if (this.gamePanel.monsters[i].health <= 0) {
+                                this.gamePanel.player.score += monsterPoints;
+                                this.gamePanel.monsters[i] = null;
+                            }
                         }
                         break;
                 }

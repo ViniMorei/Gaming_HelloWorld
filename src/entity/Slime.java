@@ -15,7 +15,7 @@ public class Slime extends Entity {
         this.worldX = this.gamePanel.tileSize * x;
         this.worldY = this.gamePanel.tileSize * y;
 
-        this.health = this.maxHealth = 1;
+        this.health = this.maxHealth = 2;
         this.hitBox = new Rectangle();
         this.hitBox.x = 2 * this.gamePanel.scale;
         this.hitBox.y = 7 * this.gamePanel.scale;

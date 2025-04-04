@@ -14,6 +14,7 @@ public class Summon extends Attack {
         this.worldY = worldY;
         this.direction = direction;
         this.maxCounter = 60;
+        this.active = true;
 
         this.hitBox = new Rectangle();
         this.hitBox.x = 0;
