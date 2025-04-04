@@ -12,6 +12,7 @@ public class Scratch extends Attack {
         this.worldY = worldY;
         this.direction = direction;
         this.maxCounter = maxCounter;
+        this.active = true;
 
         this.hitBox = new Rectangle();
         this.hitBox.x = 0;

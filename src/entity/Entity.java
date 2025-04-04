@@ -35,6 +35,9 @@ public abstract class Entity {
     public boolean invincible = false;
     public int invincibleTime = 0;
 
+    // Atributos de combate
+    public int maxHealth, health;
+    public String status = "NA";
 
     // Construtor
     public Entity (GamePanel gamePanel) {

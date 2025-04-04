@@ -90,51 +90,22 @@ public class CollisionChecker {
                 this.gamePanel.objects[i].hitBox.x = this.gamePanel.objects[i].worldX + this.gamePanel.objects[i].hitBox.x;
                 this.gamePanel.objects[i].hitBox.y = this.gamePanel.objects[i].worldY + this.gamePanel.objects[i].hitBox.y;
 
+                // Move a hitbox conforme a direção
                 switch(entity.direction) {
-                    case "up":
-                        entity.hitBox.y -= entity.speed;
-                        if (entity.hitBox.intersects(this.gamePanel.objects[i].hitBox)) {
-                            if (this.gamePanel.objects[i].collision) {
-                                entity.collisionOn = true;
-                            }
-                            if (player) {
-                                index = i;
-                            }
-                        }
-                        break;
-                    case "down":
-                        entity.hitBox.y += entity.speed;
-                        if (entity.hitBox.intersects(this.gamePanel.objects[i].hitBox)) {
-                            if (this.gamePanel.objects[i].collision) {
-                                entity.collisionOn = true;
-                            }
-                            if (player) {
-                                index = i;
-                            }
-                        }
-                        break;
-                    case "left":
-                        entity.hitBox.x -= entity.speed;
-                        if (entity.hitBox.intersects(this.gamePanel.objects[i].hitBox)) {
-                            if (this.gamePanel.objects[i].collision) {
-                                entity.collisionOn = true;
-                            }
-                            if (player) {
-                                index = i;
-                            }
-                        }
-                        break;
-                    case "right":
-                        entity.hitBox.x += entity.speed;
-                        if (entity.hitBox.intersects(this.gamePanel.objects[i].hitBox)) {
-                            if (this.gamePanel.objects[i].collision) {
-                                entity.collisionOn = true;
-                            }
-                            if (player) {
-                                index = i;
-                            }
-                        }
-                        break;
+                    case "up" -> entity.hitBox.y -= entity.speed;
+                    case "down" -> entity.hitBox.y += entity.speed;
+                    case "left" -> entity.hitBox.x -= entity.speed;
+                    case "right" -> entity.hitBox.x += entity.speed;
+                }
+
+                // Verifica colisão
+                if (entity.hitBox.intersects(this.gamePanel.objects[i].hitBox)) {
+                    if (this.gamePanel.objects[i].collision) {
+                        entity.collisionOn = true;
+                    }
+                    if (player) {
+                        index = i;
+                    }
                 }
 
                 entity.hitBox.x = entity.hitBoxDefaultX;
@@ -231,36 +202,28 @@ public class CollisionChecker {
                 this.gamePanel.monsters[i].hitBox.x = this.gamePanel.monsters[i].worldX + this.gamePanel.monsters[i].hitBox.x;
                 this.gamePanel.monsters[i].hitBox.y = this.gamePanel.monsters[i].worldY + this.gamePanel.monsters[i].hitBox.y;
 
+                // Move a hitbox conforme a direção
                 switch(attack.direction) {
-                    // O monstro morre e pontua o player
-                    case "up":
-                        attack.hitBox.y -= attack.speed;
-                        if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
-                            this.gamePanel.monsters[i] = null;
-                            this.gamePanel.player.score += monsterPoints;
-                        }
-                        break;
-                    case "down":
-                        attack.hitBox.y += attack.speed;
-                        if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
-                            this.gamePanel.monsters[i] = null;
-                            this.gamePanel.player.score += monsterPoints;
-                        }
-                        break;
-                    case "left":
-                        attack.hitBox.x -= attack.speed;
-                        if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
-                            this.gamePanel.monsters[i] = null;
-                            this.gamePanel.player.score += monsterPoints;
-                        }
-                        break;
-                    case "right":
-                        attack.hitBox.x += attack.speed;
-                        if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
-                            this.gamePanel.monsters[i] = null;
-                            this.gamePanel.player.score += monsterPoints;
-                        }
-                        break;
+                    case "up" -> attack.hitBox.y -= attack.speed;
+                    case "down" -> attack.hitBox.y += attack.speed;
+                    case "left" -> attack.hitBox.x -= attack.speed;
+                    case "right" -> attack.hitBox.x += attack.speed;
+                }
+
+                // Verificação da colisão
+                if (attack.hitBox.intersects(this.gamePanel.monsters[i].hitBox)) {
+                    this.gamePanel.monsters[i].health--;
+                    this.gamePanel.player.currentAttack.active = false;
+                    attack.active = false;
+
+
+                    if (this.gamePanel.monsters[i].health <= 0) {
+                        // O monstro morre e pontua o player
+                        this.gamePanel.player.score += monsterPoints;
+                        this.gamePanel.monsters[i] = null;
+                    }
+
+
                 }
 
                 attack.hitBox.x = attack.hitBoxDefaultX;
