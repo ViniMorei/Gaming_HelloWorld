@@ -15,6 +15,7 @@ public class Mimic extends Entity {
         this.worldX = this.gamePanel.tileSize * x;
         this.worldY = this.gamePanel.tileSize * y;
 
+        this.health = this.maxHealth = 2;
         this.hitBox = new Rectangle();
         this.hitBox.x = 1 * this.gamePanel.scale;
         this.hitBox.y = 4 * this.gamePanel.scale;
