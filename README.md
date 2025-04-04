@@ -1,11 +1,15 @@
 # _Gaming "Hello, World!"_
 
+**[PT-BR]**
+
 Esse repositório contém o meu _"Hello, World!"_ do desenvolvimento de jogos,
 sendo um jogo com o propósito de aprender os conceitos de _game dev_ e de
 _pixel art_ para criação de _sprites_. Decidi por utilizar as seguintes ferramentas: 
 **_Java_** para lidar com toda a lógica, **_LibreSprite_** para criação de _sprites_, 
 e **_IntelliJ_** para servir de ambiente de desenvolvimento e gerenciamento de pacotes.
----
+
+**[EN]**
+
 This repository contains my "Hello, World!" in game development, a game created
 to learn the fundamentals of **game dev** and **pixel art** for sprite creation. I have
 decided to use the following tools for this project: **Java** for handling all the
@@ -14,6 +18,8 @@ and package manager.
 
 ### Execução | Running the Game
 
+**[PT-BR]**
+
 Pré requisitos: **JDK 21** ou superior. Este projeto foi compilado utilizando o 
 JDK 21, sendo este necessário para a sua execução.
 - Fazer o download do JAR mais atual na seção de **_releases_**.
@@ -21,7 +27,9 @@ JDK 21, sendo este necessário para a sua execução.
   ```
   java -jar caminho\para\o\arquivo\Gaming_HelloWorld.jar
   ```
----
+
+**[EN]**
+
 Requirements: **JDK 21** or later. This project was compiled using JDK 21, which is
 required to run it.
 - Download the latest JAR file from the **releases** section.
@@ -31,6 +39,8 @@ required to run it.
   ```
 
 ## **_Purranormal Maze_**
+
+**[PT-BR]**
 
 **_Purranormal Maze_** é um jogo de exploração de labirintos feitos através
 de geração procedural de maneira aleatória, derrotando inimigos e coletando
@@ -42,7 +52,9 @@ colecionar itens para levar para o seu dono.
 
 O objetivo do jogo é encontrar todos os baús garantindo a melhor pontuação, 
 derrotando o máximo de inimigos e coletando o máximo de itens.
----
+
+**[EN]**
+
 Purranormal Maze is a maze-exploration game featuring procedurally
 generated maps, where players defeat enemies and collect items scattered
 across the map.
