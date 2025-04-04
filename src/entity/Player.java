@@ -86,15 +86,17 @@ public class Player extends Entity {
     public void pickUpObject(int index) {
         if (index != 999) {
             String name = this.gamePanel.objects[index].name;
-            this.score += this.gamePanel.objects[index].points;
 
             switch (name) {
                 case "Key":
+                    this.score += this.gamePanel.objects[index].points;
                     this.gamePanel.objects[index] = null;
                     this.keys ++;
+
                     break;
                 case "Chest":
                     if (this.keys > 0) {
+                        this.score += this.gamePanel.objects[index].points;
                         this.gamePanel.objects[index] = null;
                         this.keys --;
                         this.chests --;
@@ -105,21 +107,28 @@ public class Player extends Entity {
                     } else {
                         this.collisionOn = true;
                     }
+
                     break;
                 case "Heart":
                     if (this.health < this.maxHealth) {
                         this.health++;
                     }
+                    this.score += this.gamePanel.objects[index].points;
                     this.gamePanel.objects[index] = null;
+
                     break;
                 case "Crystal":
                     if (this.mana < this.maxMana) {
                         this.mana++;
                     }
+                    this.score += this.gamePanel.objects[index].points;
                     this.gamePanel.objects[index] = null;
+
                     break;
                 default:
+                    this.score += this.gamePanel.objects[index].points;
                     this.gamePanel.objects[index] = null;
+
                     break;
             }
         }
