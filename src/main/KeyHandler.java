@@ -89,7 +89,7 @@ public class KeyHandler implements KeyListener {
                 }
             }
             if (code == KeyEvent.VK_M) {
-                this.gamePanel.playSFX(0);
+                this.gamePanel.playSFX(1);
             }
         }
     }
