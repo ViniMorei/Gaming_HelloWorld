@@ -16,6 +16,7 @@ public abstract class Entity {
     public int worldX, worldY; // Define onde no mapa a entidade será exibida
     public int speed; // Quantos pixels se move
     public String direction; // Define sprite e movimentação
+    public String name;
 
     // Sprites (dois de cada para animar movimentação)
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
@@ -34,6 +35,9 @@ public abstract class Entity {
     public boolean invincible = false;
     public int invincibleTime = 0;
 
+    // Atributos de combate
+    public int maxHealth, health;
+    public String status = "NA";
 
     // Construtor
     public Entity (GamePanel gamePanel) {

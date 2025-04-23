@@ -134,16 +134,38 @@ public class UI {
         x = this.gamePanel.tileSize / 2;
         y += this.gamePanel.tileSize + 8;
 
+        // Desenhar ícone e quantidade de chaves
         g2.drawImage(keyImage, x, y,
                 this.gamePanel.tileSize - 8, this.gamePanel.tileSize - 8, null);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40));
         g2.drawString("x " + this.gamePanel.player.keys, x + 54, y + 32);
 
+        // Desenhar pontuação no canto direito da tela
+        int score = this.gamePanel.player.score;
+        if (score == 0){
+            x = this.gamePanel.screenWidth - (this.gamePanel.tileSize);
+        } else if (score < 100) {
+            x = this.gamePanel.screenWidth - (this.gamePanel.tileSize + 16);
+        } else if (score < 1000) {
+            x = this.gamePanel.screenWidth - (this.gamePanel.tileSize + 32);
+        } else if (score < 10000) {
+            x = this.gamePanel.screenWidth - (this.gamePanel.tileSize + 48);
+        } else if (score < 100000){
+            x = this.gamePanel.screenWidth - (this.gamePanel.tileSize + 80);
+        } else {
+            x = this.gamePanel.screenWidth - (this.gamePanel.tileSize + 96);
+        }
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40));
+        g2.drawString(String.valueOf(this.gamePanel.player.score), x, y + 32);
+
+        // Desenhar ícone e quantidade de baús coletados
+        x = this.gamePanel.tileSize / 2;
         y += this.gamePanel.tileSize + 8;
         g2.drawImage(chestImage, x, y,
                 this.gamePanel.tileSize - 8, this.gamePanel.tileSize - 8, null);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40));
         g2.drawString("x " + this.gamePanel.player.chests, x + 56, y + 32);
+
     }
 
 
@@ -165,6 +187,13 @@ public class UI {
         g2.setColor(Color.yellow);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80));
         g2.drawString(text, x, y);
+
+        // Desenhar pontuação
+        text = String.valueOf(this.gamePanel.player.score);
+        x = this.gamePanel.screenWidth / 2 - (144 + (16 * text.length()));
+        y += this.gamePanel.tileSize + 16;
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 64));
+        g2.drawString("SCORE = " + text, x, y);
     }
 
     public void drawGameOverScreen() {

@@ -9,11 +9,13 @@ public class Slime extends Entity {
     public Slime (GamePanel gamePanel, int x, int y) {
         super(gamePanel);
 
+        this.name = "Slime";
         this.direction = "down";
         this.speed = 1;
         this.worldX = this.gamePanel.tileSize * x;
         this.worldY = this.gamePanel.tileSize * y;
 
+        this.health = this.maxHealth = 2;
         this.hitBox = new Rectangle();
         this.hitBox.x = 2 * this.gamePanel.scale;
         this.hitBox.y = 7 * this.gamePanel.scale;

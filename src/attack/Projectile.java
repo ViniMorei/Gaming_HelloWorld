@@ -18,6 +18,7 @@ public class Projectile extends Attack{
         this.direction = direction;
         this.maxCounter = maxCounter;
         this.speed = speed;
+        this.active = true;
 
         this.hitBox = new Rectangle();
         this.hitBox.x = 0;
@@ -29,12 +30,15 @@ public class Projectile extends Attack{
 
         switch(name) {
             case "Fire Summon":
+                this.name = "Fire Summon";
                 getFireBallImages();
                 break;
             case "Ice Summon":
+                this.name = "Ice Summon";
                 getSnowflakeImages();
                 break;
             case "Lightning Summon":
+                this.name = "Lightning Summon";
                 getLightningBoltImages();
                 break;
             default:
