@@ -118,6 +118,8 @@ public class Player extends Entity {
                     this.gamePanel.objects[index] = null;
                     break;
             }
+
+            this.gamePanel.playSFX(5);
         }
     }
 
@@ -125,6 +127,7 @@ public class Player extends Entity {
     public void scratch() {
         if (currentAttack == null || !currentAttack.isActive()) {
             currentAttack = Scratch.createFromPlayer(this);
+            this.gamePanel.playSFX(1);
         }
     }
 
@@ -138,6 +141,7 @@ public class Player extends Entity {
         if (currentAttack == null || !currentAttack.isActive()) {
             currentAttack = Summon.createFromPlayer(this, "Fire");
             this.mana--;
+            this.gamePanel.playSFX(2);
         }
     }
 
@@ -146,6 +150,7 @@ public class Player extends Entity {
         if (currentAttack == null || !currentAttack.isActive()) {
             currentAttack = Summon.createFromPlayer(this, "Ice");
             this.mana--;
+            this.gamePanel.playSFX(3);
         }
     }
 
@@ -154,6 +159,7 @@ public class Player extends Entity {
         if (currentAttack == null || !currentAttack.isActive()) {
             currentAttack = Summon.createFromPlayer(this, "Lightning");
             this.mana--;
+            this.gamePanel.playSFX(4);
         }
     }
 

@@ -29,7 +29,8 @@ public class GamePanel extends JPanel implements Runnable {
     double FPS = 60;
     public UI ui = new UI(this);
     public KeyHandler keyH = new KeyHandler(this);
-    public Sound sound = new Sound();
+    public Sound background = new Sound();
+    public Sound sfx = new Sound();
     public TileManager tileManager = new TileManager(this);
     public CollisionChecker cChecker = new CollisionChecker(this);
 
@@ -66,6 +67,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.gameState = TITLE_STATE;
         this.assets.setObjects();
         this.assets.setMonsters();
+        background.setFile(0);
+        background.play();
+        background.loop();
     }
 
     // Começa a execução do script
@@ -153,7 +157,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // Tocar efeitos sonoros
     public void playSFX(int i) {
-        sound.setFile(i);
-        sound.play();
+        sfx.setFile(i);
+        sfx.play();
     }
 }
