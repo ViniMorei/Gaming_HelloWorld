@@ -81,7 +81,7 @@ defeating enemies and gathering many items.
 
 **I** - Magia de eletricidade - Electric summon
 
-### Personagens e inimigos
+### Personagens e inimigos | Characters
 
 | <img src="resources/previews/cat.gif"/>                               | <img src="resources/previews/slime.gif"/> | <img src="resources/previews/mimic.gif"/> | <img src="resources/previews/FS_down.gif"/>                    |
 |-----------------------------------------------------------------------|-------------------------------------------|-------------------------------------------|----------------------------------------------------------------|
@@ -97,3 +97,18 @@ defeating enemies and gathering many items.
 | Esse algoritmo consiste em percorrer uma matriz (Labirinto), e, para cada elemento (Célula / Casa), o algoritmo abre um caminho aleatoriamente com o vizinho "norte" ou "oeste", com o layout final se assemelhando a uma árvore binária, onde cada nó só tem dois filhos. O labirinto gerado por esse labirinto tem a limitação de ser um pouco previsível e ter dois lados completamente vazios | Este algoritmo consiste em visitar um elemento aleatório da matriz, e em seguida abrir um caminho com uma célula vizinha que não foi visitada ainda. Caso o algoritmo chegue em um ponto onde não há mais células que não foram visitadas ao redor, o algoritmo entra no modo _Hunt_, onde ele busca uma célula não visitada que possui pelo menos um vizinho que já foi visitado, abre caminho entre eles e volta ao modo Kill, até todas as células serem visitadas |
 | <div align=center> <img width="200" src="resources/previews/BinaryTree.jpg" alt="Labirinto Binary Tree"/> </div>                                                                                                                                                                                                                                                                                  | <div align=center> <img align=center width="200" src="resources/previews/HuntAndKill.jpg" alt="Labirinto Hunt and Kill"/> </div>                                                                                                                                                                                                                                                                                                                                      |
 | This algorithm traverses a matrix (maze), and for each element (cell/tile), it randomly opens a path to either the "north" or "west" neighbor. The final layout resembles a binary tree, where each node has at most two children. A limitation of this algorithm is that the resulting maze can be somewhat predictable, with two completely empty sides.                                        | This algorithm starts by visiting a random cell in the matrix and carving a path to an unvisited neighbor. If it reaches a dead end (a cell with no unvisited neighbors), it switches to Hunt Mode, searching for an unvisited cell that has at least one visited neighbor. It then connects them, returning to Kill Mode, and continues until all cells are visited.                                                                                                 |
+
+
+## Agradecimentos | Special thanks
+
+**[PT-BR]**
+
+Gostaria de agradecer a meu parceiro, Davi de Oliveira, que compôs a música principal
+do jogo, e me incentivou e ajudou durante o desenvolvimento do projeto. Seu apoio
+foi essencial para dar vida a este jogo.
+
+**[EN]**
+
+I would like to thank my beloved partner, Davi de Oliveira, who made the main 
+soundtrack for the game, and encouraged and helped me throughout the game development.
+Your support made it possible for this game to feel more alive.
